@@ -20,6 +20,15 @@
         $('.navbar-collapse').collapse('hide');
     });
 
+    $( ".navbar-toggler" ).click(function() {
+      $(".burger-line1, .burger-line2, .burger-line3" ).toggleClass( "change" );
+      $("body").toggleClass("overflown");
+    });
+
+    $(".nav-link").click(function() {
+      $("body").removeClass("overflown");
+      $(".burger-menu div").removeClass("change");
+    });
     /*// Activate scrollspy to add active class to navbar items on scroll
     $('body').scrollspy({
         target: '#mainNav',
@@ -47,81 +56,7 @@
 
 
 
-    $(function () {
 
-        $("#contactForm input,#contactForm textarea").jqBootstrapValidation({
-            preventSubmit: true,
-            submitError: function ($form, event, errors) {
-                // additional error messages or events
-            },
-            submitSuccess: function ($form, event) {
-                event.preventDefault(); // prevent default submit behaviour
-                // get values from FORM
-                var name = $("input#name").val();
-                var email = $("input#email").val();
-                var phone = $("input#phone").val();
-                var message = $("textarea#message").val();
-                var firstName = name; // For Success/Failure Message
-                // Check for white space in name for Success/Fail message
-                if (firstName.indexOf(' ') >= 0) {
-                    firstName = name.split(' ').slice(0, -1).join(' ');
-                }
-                $this = $("#sendMessageButton");
-                $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
-                $.ajax({
-                    url: "././mail/contact_me.php",
-                    type: "POST",
-                    data: {
-                        name: name,
-                        phone: phone,
-                        email: email,
-                        message: message
-                    },
-                    cache: false,
-                    success: function () {
-                        // Success message
-                        $('#success').html("<div class='alert alert-success'>");
-                        $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                            .append("</button>");
-                        $('#success > .alert-success')
-                            .append("<strong>Your message has been sent. </strong>");
-                        $('#success > .alert-success')
-                            .append('</div>');
-                        //clear all fields
-                        $('#contactForm').trigger("reset");
-                    },
-                    error: function () {
-                        // Fail message
-                        $('#success').html("<div class='alert alert-danger'>");
-                        $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                            .append("</button>");
-                        $('#success > .alert-danger').append($("<strong>").text("Sorry " + firstName + ", it seems that my mail server is not responding. Please try again later!"));
-                        $('#success > .alert-danger').append('</div>');
-                        //clear all fields
-                        $('#contactForm').trigger("reset");
-                    },
-                    complete: function () {
-                        setTimeout(function () {
-                            $this.prop("disabled", false); // Re-enable submit button when AJAX call is complete
-                        }, 1000);
-                    }
-                });
-            },
-            filter: function () {
-                return $(this).is(":visible");
-            },
-        });
-
-        $("a[data-toggle=\"tab\"]").click(function (e) {
-            e.preventDefault();
-            $(this).tab("show");
-        });
-    });
-
-    /*When clicking on Full hide fail/success boxes */
-    $('#name').focus(function () {
-        $('#success').html('');
-    });
 
 
 
@@ -149,15 +84,18 @@
                 divs[i] = document.querySelector('.instafeed__images').insertBefore(document.createElement("div"), null);
                 divs[i].style.backgroundImage = "url(" + `${image.images.standard_resolution.url}` + ")";
             }
-        }
+        };
     feed.run();
 
 
 
     /*--------------------------------------------------Fetch WP--------------------------------------------------*/
 
-    let begin = new Array,
-        end = new Array;
+    let begin = [],
+        end = [],
+        machineBegin = [],
+        machineEnd = [],
+        events = [];
 
     fetch("http://viitek.dk/wp/wp-json/wp/v2/tags")
         .then(function (response) {
@@ -168,23 +106,52 @@
         });
 
     function appendWPtag(tag) {
-      let crudeBegin = new Array,
-          crudeEnd = new Array;
+        console.log(tag);
+      let crudeBegin = [],
+          crudeMachineBegin = [],
+          crudeEnd = [],
+          crudeMachineEnd = [];
       for (let i = 0; i < Object.keys(tag).length; i+=2) {
           crudeBegin[i] = tag[i].name;
-      };
+          crudeMachineBegin[i] = machinerize(tag[i].name);
+      }
       begin = crudeBegin.filter(function(el) {
           return el != "";
       });
-      console.log(begin);
+        machineBegin = crudeMachineBegin.filter(function(el) {
+            return el != "";
+        });
       for (let i = 1; i < Object.keys(tag).length; i+=2) {
           crudeEnd[i] = tag[i].name;
+          crudeMachineEnd[i] = machinerize(tag[i].name);
       }
       end = crudeEnd.filter(function(el) {
           return el != "";
       });
-      console.log(end);
+        machineEnd = crudeMachineEnd.filter(function(el) {
+            return el != "";
+        });
+
+        generateEvents();
+        initialize();
     }
+
+    function machinerize(date) {
+        let split = date.split(/[.\s]/g);
+        return `${split[2]}-${split[1]}-${split[0]}T${split[3]}:00.000`;
+    }
+
+    function generateEvents() {
+        for (let i = 0; i < begin.length; i++) {
+            events[i]={
+                title: "Wydarzenie",
+                start: machineBegin[i],
+                end: machineEnd[i]
+            }
+        }
+    }
+
+
 
     fetch("http://viitek.dk/wp/wp-json/wp/v2/posts")
         .then(function (response) {
@@ -194,26 +161,28 @@
             appendWPpost(json);
         });
 
-
-
     function appendWPpost(post) {
-        let articles = new Array,
-            linez = new Array;
+        let articles = [],
+            linez = [];
         for (let i = 0; i < Object.keys(post).length; ++i) {
             articles[i] = document.querySelector(".posts-container").insertBefore(document.createElement("article"), null);
-            articles[i].innerHTML = `<h2>${post[i].title.rendered}</h2> <p>${post[i].content.rendered}</p> <p>Starts: ${begin[i]}</p> <p>Ends: ${end[i]}</p>`;
+            articles[i].innerHTML = `<h2>${post[i].title.rendered}</h2><p>${post[i].content.rendered}</p><p>Starts: ${begin[i]}</p><p>Ends: ${end[i]}</p><p>Machine will see: ${machineBegin[i]}</p><p>Machine will see: ${machineEnd[i]}</p>`;
             articles[i].classList.add("article", i);
             linez[i] = document.querySelector(".posts-container").insertBefore(document.createElement("hr"), null);
             linez[i].classList.add("line");
-        };
+        }
     }
 
+console.log(events);
+function initialize (){
+    $('#calendar').fullCalendar({
+
+        heigth:250,
+        events:events
 
 
-    function machinerize(date) {
-    }
-
-
+    })
+}
 
 
 

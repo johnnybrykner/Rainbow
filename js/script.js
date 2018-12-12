@@ -61,7 +61,11 @@
 
 
     /*--------------------------------------------------INSTAFEED--------------------------------------------------*/
+if (document.querySelector(".instafeed")) {
+    feedTheInsta();
+}
 
+function feedTheInsta() {
     let feed = new Instafeed({
             accessToken: '9393991895.1677ed0.35e5798602e943c28a7e5bc5da8433d3',
             userId: '9393991895',
@@ -86,18 +90,18 @@
             }
         };
     feed.run();
-
+}
 
 
     /*--------------------------------------------------Fetch WP--------------------------------------------------*/
 
-    let begin = [],
+    /*let begin = [],
         end = [],
         machineBegin = [],
         machineEnd = [],
         events = [];
 
-    fetch("http://viitek.dk/wp/wp-json/wp/v2/tags")
+    fetch("http://skif-patria.pl/wordpress/wp-json/wp/v2/tags")
         .then(function (response) {
             return response.json();
         })
@@ -149,11 +153,11 @@
                 end: machineEnd[i]
             }
         }
-    }
+    }*/
 
 
 
-    fetch("http://viitek.dk/wp/wp-json/wp/v2/posts")
+    fetch("http://skif-patria.pl/wordpress/wp-json/wp/v2/posts")
         .then(function (response) {
             return response.json();
         })
@@ -162,27 +166,63 @@
         });
 
     function appendWPpost(post) {
-        let articles = [],
-            linez = [];
-        for (let i = 0; i < Object.keys(post).length; ++i) {
-            articles[i] = document.querySelector(".posts-container").insertBefore(document.createElement("article"), null);
-            articles[i].innerHTML = `<h2>${post[i].title.rendered}</h2><p>${post[i].content.rendered}</p><p>Starts: ${begin[i]}</p><p>Ends: ${end[i]}</p><p>Machine will see: ${machineBegin[i]}</p><p>Machine will see: ${machineEnd[i]}</p>`;
-            articles[i].classList.add("article", i);
-            linez[i] = document.querySelector(".posts-container").insertBefore(document.createElement("hr"), null);
-            linez[i].classList.add("line");
+        let news = [],
+            linez = [],
+            archive = [];
+        for (let i = 0, a = 0; i===2, a < Object.keys(post).length; i++, a++) {
+            if (document.querySelector(".posts-container")) {
+                news[i] = document.querySelector(".posts-container").insertBefore(document.createElement("article"), null);
+                news[i].innerHTML = `<h2>${post[i].title.rendered}</h2><p>${post[i].content.rendered}</p>`;
+                news[i].classList.add("article", i);
+            }
+
+            if (document.querySelector(".archive-container")) {
+                archive[a] = document.querySelector(".archive-container").insertBefore(document.createElement("article"), null);
+                archive[a].innerHTML = `<h2>${post[a].title.rendered}</h2><p>${post[a].content.rendered}</p>`;
+                archive[a].classList.add("article", a);
+            }
+            linez[a] = document.querySelector(".posts-container, .archive-container").insertBefore(document.createElement("hr"), null);
+            linez[a].classList.add("line");
         }
+        console.log(news, archive);
     }
 
-console.log(events);
-function initialize (){
-    $('#calendar').fullCalendar({
-
-        heigth:250,
-        events:events
 
 
-    })
-}
+    fetch('http://skif-patria.pl/wordpress/wp-json/tribe/events/v1/events')
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(json) {
+            appendEvents(json.events);
+        });
+
+    function appendEvents(events) {
+        let wydarzenia = [];
+
+        for (let i = 0; i < events.length; i++) {
+            let event = {};
+            event.start = events[i].start_date;
+            event.end = events[i].end_date;
+            event.title = events[i].title;
+            event.allDay = events[i].all_day;
+            wydarzenia[i] = event;
+        }
+
+        console.log(wydarzenia);
+        if (document.querySelector("#calendar")) {
+            $('#calendar').fullCalendar({
+                locale: "pl",
+                events: wydarzenia,
+                eventBackgroundColor: "#E01734",
+                eventTextColor: "white",
+                defaultView: 'agenda',
+                dayCount: 7,
+                height: 100,
+                allDayText: "They took our room"
+            });
+        }
+    }
 
 
 

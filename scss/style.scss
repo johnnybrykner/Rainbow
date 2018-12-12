@@ -440,33 +440,31 @@ header.masthead {
 
 
 //--------------------------------------------------Styling for the news section--------------------------------------------------
-#posts {
-    .article {
-        display: grid;
-        grid-template-rows: auto 1fr 1fr;
-        grid-template-columns: 1fr;
-        justify-content: center;
 
-        h2 {
-            padding: 1rem 0;
-        }
+.article {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: auto;
+    justify-content: center;
+
+    h2 {
+        padding: 1rem 0;
+        margin: 0;
     }
-
-    .line {
-        border: 0;
-        border-top: 1px solid rgba(0, 0, 0, .3)
-    }
-
-
 }
+
+.line {
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, .3)
+}
+
 
 @media(min-width:767px) {
-  #posts{
   .article{
     grid-template-columns: 1fr 1fr;
+  }
 }
-}
-}
+
 
 //--------------------------------------------------Styling for the instafeed--------------------------------------------------
 .instafeed {

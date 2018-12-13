@@ -30,7 +30,7 @@ h6 {
 section {
   padding: 3rem 0; }
   section h2.section-heading {
-    font-size: 40px;
+    font-size: 2em;
     margin-top: 0;
     margin-bottom: 15px;
     font-family: Bitter; }
@@ -41,6 +41,9 @@ section {
     margin-bottom: 75px;
     text-transform: none; }
 
+@media (min-width: 768px) {
+  h2.section-heading {
+    font-size: 3em; } }
 .btn {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 3px 6px rgba(0, 0, 0, 0.2);
   font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -95,7 +98,7 @@ img::-moz-selection {
   #mainNav .burger-line3 {
     height: 3px;
     width: 25px;
-    background-color: #222222;
+    background-color: #212529;
     margin: 4px 0;
     border-radius: 1px;
     transition: 0.5s all; }
@@ -108,7 +111,7 @@ img::-moz-selection {
     border: 0;
     font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; }
   #mainNav .navbar-brand {
-    color: #222222;
+    color: #212529;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -123,11 +126,10 @@ img::-moz-selection {
     #mainNav .navbar-nav .nav-item {
       text-align: center; }
       #mainNav .navbar-nav .nav-item .btn {
-        font-size: 150%;
-        margin: 1em; }
+        font-size: 120%; }
       #mainNav .navbar-nav .nav-item .nav-link {
-        font-size: 150%;
-        font-weight: 400;
+        font-weight: bolder;
+        font-size: 120%;
         padding: 1em 0;
         letter-spacing: 1px;
         color: black;
@@ -135,9 +137,9 @@ img::-moz-selection {
         #mainNav .navbar-nav .nav-item .nav-link.active {
           color: #E01734; }
   #mainNav .btn-outline-primary {
+    margin: 1em 0;
     border-color: #E01734;
     color: white;
-    font-weight: 400;
     background-color: #E01734; }
   #mainNav .btn-outline-primary:hover {
     background-color: white;
@@ -171,13 +173,13 @@ img::-moz-selection {
       height: auto;
       margin-left: 0 !important;
       width: 100%;
-      justify-content: space-evenly; }
+      justify-content: flex-end; }
       #mainNav .navbar-nav .nav-item {
         align-self: center; }
         #mainNav .navbar-nav .nav-item .nav-link {
-          font-size: 1.5em;
           position: relative;
-          padding: .1rem !important; }
+          padding: .1rem !important;
+          margin: 0 1em; }
         #mainNav .navbar-nav .nav-item .nav-link:after {
           transition: all 0.25s;
           position: absolute;
@@ -297,29 +299,29 @@ header.masthead {
     #events .calendar .event-showcase {
       background-color: #f8f9fa; } }
 .article {
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: auto;
-  justify-content: center; }
+  text-align: left; }
   .article h2 {
     padding: 1rem 0;
     margin: 0; }
 
-.line {
+hr {
   border: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.3); }
 
 @media (min-width: 768px) {
   .article {
     grid-template-columns: 1fr 1fr; } }
+#posts .btn {
+  margin: 3em 0; }
+
 .instafeed .btn {
-  margin: 1em 0; }
+  margin: 3em 0; }
 .instafeed .instafeed__images {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 100%;
   grid-gap: 1rem; }
   .instafeed .instafeed__images div {
-    width: 300px;
+    width: 100%;
     height: 300px;
     background-size: cover;
     justify-self: center; }
@@ -341,50 +343,66 @@ header.masthead {
   #contact .container {
     width: 70%; } }
 footer {
+  color: white;
   padding: 0;
   text-align: center;
-    /*.footercontainer {padding: 0;
-margin: 0;} */ }
-  footer .ladiesinred {
-    width: 100vw; }
-  footer .footerimg {
-    background-image: url("../img/ladiesinred.png");
+  background-color: #212529; }
+  footer img {
+    width: 0px; }
+  footer .footer-img {
+    background-image: url("../img/footer-pattern-white.png");
     background-position: center bottom;
     background-size: cover;
-    height: 120px; }
+    height: 50px; }
+  footer p {
+    margin: 0; }
+    footer p a {
+      color: white; }
   footer span.copyright {
-    font-size: 90%;
+    font-size: 70%;
     line-height: 40px;
     text-align: center;
     font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; }
-  footer .footertext {
-    justify-content: center;
-    padding-top: 0.5rem; }
-  footer ul.quicklinks {
-    font-size: 90%;
-    line-height: 40px;
-    margin-bottom: 0;
-    text-transform: none;
-    font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; }
-
-ul.social-buttons {
-  margin-bottom: 0; }
-  ul.social-buttons li a {
-    font-size: 20px;
-    line-height: 50px;
-    display: block;
-    width: 50px;
-    height: 50px;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
+  footer .footer-text {
+    padding-top: 3rem;
+    display: grid; }
+  footer .btn-outline-primary {
+    margin: 1em 0;
+    text-transform: uppercase;
+    border-color: #E01734;
     color: white;
-    border-radius: 100%;
-    outline: none;
-    background-color: #222222; }
-    ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons li a:hover {
-      background-color: #E01734; }
+    background-color: #E01734; }
+  footer .btn-outline-primary:hover {
+    background-color: white;
+    color: black;
+    border-color: #E01734; }
+  footer .btn-outline-primary.active {
+    background-color: white;
+    color: black; }
 
+@media (min-width: 992px) {
+  footer img {
+    width: 20px; }
+  footer a {
+    justify-self: center; }
+  footer .btn {
+    margin: 0;
+    justify-self: end; }
+  footer .footer-text {
+    padding: 4em 0 0;
+    font-size: 1em;
+    display: grid;
+    text-align: left;
+    grid-template-columns: 2fr auto auto auto;
+    grid-column-gap: 3em; }
+  footer .footer-img {
+    background-image: url("../img/footer-pattern-white.png");
+    background-position: center bottom;
+    background-size: cover;
+    height: 100px; }
+  footer span.copyright {
+    margin: 4em 0 1em 0;
+    grid-column: 1/5; } }
 header.masthead-about {
   height: 80vh;
   color: white;
@@ -437,3 +455,5 @@ header.masthead-about {
   margin-top: 75px; }
   #archive small {
     font-family: 'Lora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; }
+
+/*# sourceMappingURL=style.css.map */

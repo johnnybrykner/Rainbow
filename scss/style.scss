@@ -8,7 +8,7 @@ $gray-500: #adb5bd !default;
 $gray-600: #868e96 !default;
 $gray-700: #495057 !default;
 $gray-800: #343a40 !default;
-$gray-900: #222222 !default;
+$gray-900: #212529 !default;
 $black: #000 !default;
 $primary: #E01734 !default;
 
@@ -74,7 +74,7 @@ section {
     padding: 3rem 0;
 
     h2.section-heading {
-        font-size: 40px;
+        font-size: 2em;
         margin-top: 0;
         margin-bottom: 15px;
         font-family: Bitter;
@@ -87,6 +87,12 @@ section {
         margin-bottom: 75px;
         text-transform: none;
     }
+}
+
+@media(min-width:768px){
+  h2.section-heading {
+      font-size: 3em;
+}
 }
 
 // Button Styles
@@ -186,10 +192,12 @@ img::-moz-selection {
         color: black;
         border: 0;
         @include heading-font;
+
     }
 
     .navbar-brand {
         color: $gray-900;
+
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
@@ -208,19 +216,20 @@ img::-moz-selection {
     }
 
     .navbar-nav {
+
         height: 100vh;
 
         .nav-item {
             text-align: center;
             .btn{
-              font-size: 150%;
-              margin: 1em;
+              font-size: 120%;
+
 
             }
             .nav-link {
+                font-weight:bolder;
+                font-size: 120%;
 
-                font-size: 150%;
-                font-weight: 400;
                 padding: 1em 0;
                 letter-spacing: 1px;
                 color: black;
@@ -234,9 +243,10 @@ img::-moz-selection {
     }
 
     .btn-outline-primary {
+      margin:1em 0;
         border-color: $primary;
         color: white;
-        font-weight: 400;
+
         background-color: $primary;
 
     }
@@ -289,7 +299,7 @@ img::-moz-selection {
           height:auto;
             margin-left: 0 !important;
             width: 100%;
-            justify-content: space-evenly;
+            justify-content: flex-end;
 
             .nav-item {
               align-self: center;
@@ -297,9 +307,10 @@ img::-moz-selection {
 
                 .nav-link {
 
-                    font-size: 1.5em;
+
                     position: relative;
                     padding: .1rem !important;
+                    margin: 0 1em;
                 }
 
                 .nav-link:after {
@@ -530,18 +541,17 @@ header.masthead {
 //--------------------------------------------------Styling for the news section--------------------------------------------------
 
 .article {
-    display: grid;
-    grid-template-rows: 1fr ;
-    grid-template-columns: auto;
-    justify-content: center;
+  text-align: left;
+
 
     h2 {
         padding: 1rem 0;
         margin: 0;
+
     }
 }
 
-.line {
+hr {
     border: 0;
     border-top: 1px solid rgba(0, 0, 0, .3)
 }
@@ -553,21 +563,27 @@ header.masthead {
   }
 }
 
+#posts{
+  .btn{
+    margin:3em 0;
+  }
+}
+
 
 //--------------------------------------------------Styling for the instafeed--------------------------------------------------
 .instafeed {
 
   .btn{
-    margin: 1em 0;
+    margin: 3em 0;
   }
 
 
     .instafeed__images {
         display: grid;
-        grid-template-columns: 1fr ;
+        grid-template-columns: 100% ;
         grid-gap: 1rem;
         div {
-            width: 300px;
+            width: 100%;
             height: 300px;
             background-size: cover;
             justify-self: center;
@@ -618,70 +634,115 @@ header.masthead {
 
 // Styling for the footer
 footer {
+
+  img{
+    width:0px;
+
+
+  }
+
+  color:white;
     padding: 0;
     text-align: center;
-    .ladiesinred {
-        width: 100vw;
-    }
-    /*.footercontainer {padding: 0;
-margin: 0;} */
-    .footerimg {
-        background-image: url('../img/ladiesinred.png');
+    background-color: $gray-900;
+
+
+    .footer-img {
+        background-image: url('../img/footer-pattern-white.png');
         background-position: center bottom;
         background-size: cover;
-        height: 120px;
+        height: 50px;
+    }
+    p{
+      margin:0;
+
+      a{
+        color:white;
+      }
     }
 
     span.copyright {
-        font-size: 90%;
+        font-size: 70%;
         line-height: 40px;
         text-align: center;
 
         @include heading-font;
     }
-    .footertext {
-        justify-content: center;
-        padding-top: 0.5rem;
+    .footer-text {
+        padding-top: 3rem;
+        display:grid;
+
 
 
     }
 
-    ul.quicklinks {
-        font-size: 90%;
-        line-height: 40px;
-        margin-bottom: 0;
-        text-transform: none;
-        @include heading-font;
+    .btn-outline-primary {
+
+      margin: 1em 0;
+      text-transform: uppercase;
+
+        border-color: $primary;
+        color: white;
+
+        background-color: $primary;
+
     }
+
+    .btn-outline-primary:hover {
+        background-color: white;
+        color: black;
+          border-color: $primary;
+
+    }
+
+    .btn-outline-primary.active {
+        background-color: white;
+        color: black;
+    }
+  }
+
+
+
+
+@media(min-width:992px){
+
+  footer{
+    img{
+      width:20px;
+    }
+
+    a{
+      justify-self:center;
+    }
+
+
+  .btn{
+    margin:0;
+    justify-self: end;
+  }
+
+  .footer-text{
+    padding:4em 0 0;
+    font-size: 1em;
+    display:grid;
+    text-align:left;
+    grid-template-columns: 2fr auto auto auto;
+    grid-column-gap:3em;
+  }
+
+  .footer-img {
+      background-image: url('../img/footer-pattern-white.png');
+      background-position: center bottom;
+      background-size: cover;
+      height: 100px;
+  }
+  span.copyright{
+    margin:4em 0 1em 0;
+    grid-column: 1/5;
+
+  }
 }
-
-ul.social-buttons {
-    margin-bottom: 0;
-
-    li {
-        a {
-            font-size: 20px;
-            line-height: 50px;
-            display: block;
-            width: 50px;
-            height: 50px;
-            -webkit-transition: all 0.3s;
-            -moz-transition: all 0.3s;
-            transition: all 0.3s;
-            color: white;
-            border-radius: 100%;
-            outline: none;
-            background-color: $gray-900;
-
-            &:active,
-            &:focus,
-            &:hover {
-                background-color: $primary;
-            }
-        }
-    }
 }
-
 
 
 //about section------------------------------

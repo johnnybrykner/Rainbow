@@ -20,14 +20,14 @@
         $('.navbar-collapse').collapse('hide');
     });
 
-    $( ".navbar-toggler" ).click(function() {
-      $(".burger-line1, .burger-line2, .burger-line3" ).toggleClass( "change" );
-      $("body").toggleClass("overflown");
+    $(".navbar-toggler").click(function () {
+        $(".burger-line1, .burger-line2, .burger-line3").toggleClass("change");
+        $("body").toggleClass("overflown");
     });
 
-    $(".nav-link").click(function() {
-      $("body").removeClass("overflown");
-      $(".burger-menu div").removeClass("change");
+    $(".nav-link").click(function () {
+        $("body").removeClass("overflown");
+        $(".burger-menu div").removeClass("change");
     });
     /*// Activate scrollspy to add active class to navbar items on scroll
     $('body').scrollspy({
@@ -49,48 +49,37 @@
     $(window).scroll(navbarCollapse);
 
 
-
-
-
-
-
-
-
-
-
-
-
     /*--------------------------------------------------INSTAFEED--------------------------------------------------*/
-if (document.querySelector(".instafeed")) {
-    feedTheInsta();
-}
+    if (document.querySelector(".instafeed")) {
+        feedTheInsta();
+    }
 
-function feedTheInsta() {
-    let feed = new Instafeed({
-            accessToken: '9393991895.1677ed0.35e5798602e943c28a7e5bc5da8433d3',
-            userId: '9393991895',
-            get: 'user',
-            limit: 6,
-            mock: true,
-            success: (response) => {
-                appendImages(response.data);
-            }
-        }),
-        divs = new Array,
-        appendImages = (images) => {
-            for (var i = 0; i < images.length; i++) {
-                let image = images[i];
-
-                if (image.caption === null) {
-                    image.caption = "";
+    function feedTheInsta() {
+        let feed = new Instafeed({
+                accessToken: '9393991895.1677ed0.35e5798602e943c28a7e5bc5da8433d3',
+                userId: '9393991895',
+                get: 'user',
+                limit: 6,
+                mock: true,
+                success: (response) => {
+                    appendImages(response.data);
                 }
+            }),
+            divs = new Array,
+            appendImages = (images) => {
+                for (var i = 0; i < images.length; i++) {
+                    let image = images[i];
 
-                divs[i] = document.querySelector('.instafeed__images').insertBefore(document.createElement("div"), null);
-                divs[i].style.backgroundImage = "url(" + `${image.images.standard_resolution.url}` + ")";
-            }
-        };
-    feed.run();
-}
+                    if (image.caption === null) {
+                        image.caption = "";
+                    }
+
+                    divs[i] = document.querySelector('.instafeed__images').insertBefore(document.createElement("div"), null);
+                    divs[i].style.backgroundImage = "url(" + `${image.images.standard_resolution.url}` + ")";
+                }
+            };
+        feed.run();
+    }
 
 
     /*--------------------------------------------------Fetch WP--------------------------------------------------*/
@@ -169,22 +158,45 @@ function feedTheInsta() {
         let news = [],
             linez = [],
             archive = [];
-        for (let i = 0, a = 0; i===2, a < Object.keys(post).length; i++, a++) {
-            if (document.querySelector(".posts-container")) {
+        if (document.querySelector(".posts-container")) {
+            for (let i = 0; i < 3; i++) {
                 news[i] = document.querySelector(".posts-container").insertBefore(document.createElement("article"), null);
-                news[i].innerHTML = `<h2>${post[i].title.rendered}</h2><p>${post[i].content.rendered}</p>`;
+                news[i].innerHTML = `<h2>${post[i].title.rendered}</h2><p>${post[i].content.rendered}</p><small>${humanize(post[i].date)}</small>`;
                 news[i].classList.add("article", i);
+                linez[i] = document.querySelector(".posts-container").insertBefore(document.createElement("hr"), null);
+                linez[i].classList.add("line");
             }
-
-            if (document.querySelector(".archive-container")) {
-                archive[a] = document.querySelector(".archive-container").insertBefore(document.createElement("article"), null);
-                archive[a].innerHTML = `<h2>${post[a].title.rendered}</h2><p>${post[a].content.rendered}</p>`;
-                archive[a].classList.add("article", a);
-            }
-            linez[a] = document.querySelector(".posts-container, .archive-container").insertBefore(document.createElement("hr"), null);
-            linez[a].classList.add("line");
         }
-        console.log(news, archive);
+        if (document.querySelector(".archive-container")) {
+            for (let i = 0; i < Object.keys(post).length; i++) {
+                archive[i] = document.querySelector(".archive-container").insertBefore(document.createElement("article"), null);
+                archive[i].innerHTML = `<h2>${post[i].title.rendered}</h2><p>${post[i].content.rendered}</p><small>${humanize(post[i].date)}</small>`;
+                archive[i].classList.add("article", i);
+                linez[i] = document.querySelector(".archive-container").insertBefore(document.createElement("hr"), null);
+                linez[i].classList.add("line");
+            }
+        }
+    }
+
+    function humanize(date) {
+        let split = date.split(/[-T\s]/g);
+        return `Published ${split[2]}.${split[1]}.${split[0]} at ${split[3]}`;
+    }
+
+    function monthize(date) {
+        let split = date.split(/[-T\s]/g),
+            monthnames = ["0", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        return monthnames[Number(split[1])];
+    }
+
+    function dayize(date) {
+        let split = date.split(/[-T\s]/g);
+        return split[2];
+    }
+
+    function timize(date) {
+        let split = date.split(/[-T\s]/g);
+        return split[3];
     }
 
 
@@ -198,19 +210,34 @@ function feedTheInsta() {
         });
 
     function appendEvents(events) {
-        let wydarzenia = [];
-
         for (let i = 0; i < events.length; i++) {
             let event = {};
             event.start = events[i].start_date;
             event.end = events[i].end_date;
             event.title = events[i].title;
-            event.allDay = events[i].all_day;
+            if (events[i].venue.length !== 0) {
+                event.venue = ' at ' + events[i].venue.venue + ", " + events[i].venue.city;
+            } else {
+                event.venue = "";
+            }
+            //event.allDay = events[i].all_day;
             wydarzenia[i] = event;
         }
 
-        console.log(wydarzenia);
-        if (document.querySelector("#calendar")) {
+        for (let i = 0; i < boxes.length; i++) {
+            let day = dayize(wydarzenia[i].start),
+                month = monthize(wydarzenia[i].start),
+                time;
+            if (timize(wydarzenia[i].start) === "00:00:00") {
+                time = "All day"
+            } else {
+                time = timize(wydarzenia[i].start);
+            }
+            labels[i].innerHTML = '<h3>' + month + '</h3>';
+            boxes[i].innerHTML += '<h4>' + day + '</h4>' + '<p>' + wydarzenia[i].title + wydarzenia[i].venue + ", " + time + '</p>';
+        }
+
+        /*if (document.querySelector("#calendar")) {
             $('#calendar').fullCalendar({
                 locale: "pl",
                 events: wydarzenia,
@@ -221,7 +248,27 @@ function feedTheInsta() {
                 height: 100,
                 allDayText: "They took our room"
             });
-        }
+        }*/
+    }
+
+
+
+    /*--------------------------------------------------Event Swiping--------------------------------------------------*/
+
+    let wydarzenia = [],
+        boxes = document.querySelectorAll(".event-showcase"),
+        labels = document.querySelectorAll(".event__month");
+
+    console.log(wydarzenia);
+
+    if (document.querySelector(".calendar")) {
+        document.querySelector(".left").addEventListener("click", function() {
+
+        });
+    }
+
+    function swipe() {
+
     }
 
 

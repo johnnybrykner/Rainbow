@@ -15,14 +15,13 @@ $primary: #E01734 !default;
 
 
 //--------------------------------------------------Font Mixins--------------------------------------------------
-@mixin serif-font {
-    font-family: 'Bitter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-}
-
 
 
 @mixin body-font {
     font-family: 'Bitter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+@mixin date-font {
+    font-family: 'Lora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 @mixin heading-font {
@@ -67,6 +66,10 @@ h6 {
     @include body-font;
 }
 
+.text-bolder{
+  font-weight: bolder;
+}
+
 section {
     padding: 3rem 0;
 
@@ -83,7 +86,6 @@ section {
         font-style: italic;
         margin-bottom: 75px;
         text-transform: none;
-        @include serif-font;
     }
 }
 
@@ -426,24 +428,110 @@ header.masthead {
 
 
 //--------------------------------------------------Styling for the calendar section--------------------------------------------------
-.service-heading {
-    margin: 15px 0;
-    text-transform: none;
+
+#events {
+
+    .calendar {
+
+        display: flex;
+        flex-flow: column nowrap;
+        width: 100%;
+        button{
+
+          background: none;
+          border: none;
+          img{
+            width:3em;
+          }
+        }
+
+
+        figure:first-of-type {
+            grid-area: one;
+        }
+        figure:nth-of-type(2) {
+            grid-area: two;
+        }
+        figure:last-of-type {
+            grid-area: three;
+        }
+        .left {
+            grid-area: left;
+        }
+        .right {
+            grid-area: right;
+        }
+
+        .event-showcase {
+          border-radius: 0.25rem;
+          background-color: $gray-100;
+          height: 400px;
+          max-width:350px;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 3px 6px rgba(0,0,0,0.2);
+
+            .event__month {
+              border-top-left-radius: 0.25rem;
+              border-top-right-radius: 0.25rem;
+              text-align: center;
+              background-color: $primary;
+              display: grid;
+              padding:1em;
+
+
+
+
+                h3 {
+                    color: #fff;
+                    margin:0;
+
+
+
+                }
+
+            }
+
+
+                            h4{
+                              font-weight: bolder;
+                              font-size: 6rem;
+                              text-align: center;
+                              padding:0.2em;
+                            }
+
+                            p{
+                              margin: 0 2em;
+                            }
+        }
+    }
 }
 
-#services {
-    width: 33%;
+@media(min-width:768px) {
+    #events {
+
+        .calendar {
+            display: grid;
+            grid-gap: 2rem;
+            grid-template-columns: auto 1fr 1fr 1fr auto;
+            grid-template-rows: 1fr;
+            grid-template-areas:
+
+                "left one two three right";
+
+            .event-showcase {
+                  background-color: $gray-100;
+
+
+        }
+      }
+    }
 }
-
-
-
 
 
 //--------------------------------------------------Styling for the news section--------------------------------------------------
 
 .article {
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr ;
     grid-template-columns: auto;
     justify-content: center;
 
@@ -459,7 +547,7 @@ header.masthead {
 }
 
 
-@media(min-width:767px) {
+@media(min-width:768px) {
   .article{
     grid-template-columns: 1fr 1fr;
   }
@@ -682,3 +770,21 @@ header.masthead-about {
     }
 
 }
+
+
+
+
+
+// News archive section---------------------
+
+ .archive-container{
+   text-align: left;
+
+ }
+
+ #archive{
+   small{
+     @include date-font;
+   }
+   margin-top:75px;
+ }

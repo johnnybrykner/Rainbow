@@ -21,7 +21,7 @@ $primary: #E01734 !default;
     font-family: 'Bitter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 @mixin date-font {
-    font-family: 'Lora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 @mixin heading-font {
@@ -566,8 +566,17 @@ hr {
 }
 
 #posts{
+
   .btn{
     margin:3em 0;
+  }
+}
+
+@media(min-width:992px){
+  #posts{
+    .container{
+      width:70%;
+    }
   }
 }
 
@@ -608,16 +617,25 @@ hr {
 
 //--------------------------------------------------Styling for the contact section--------------------------------------------------
 #contact {
-    background-color: $gray-100;
+  padding-bottom: 6em;
+      background-color: $gray-100;
     a{
       color:$primary;
+      margin: 1em 0;
+
     }
 
+    h4{
+      margin:0.5em 0;
+    }
+
+  }
 
 
 
 
-}
+
+
 @media(min-width:767px) {
 #contact{
   h3 {
@@ -845,6 +863,8 @@ header.masthead-about {
 // News archive section---------------------
 
  .archive-container{
+  margin:0 auto;
+   width:70%;
    text-align: left;
 
  }
@@ -853,5 +873,37 @@ header.masthead-about {
    small{
      @include date-font;
    }
-   margin-top:75px;
  }
+
+.masthead-news{
+  background-image: url('../img/news.png');
+  background-position: center;
+  background-size: contain;
+      color: white;
+      height: 80vh;
+display: grid;
+.container {
+    height: 100%;
+    margin-top: 75px;
+    display: grid;
+    align-content: center;
+
+    .intro-heading {
+        text-align: center;
+        align-items: center;
+        font-size: 50px;
+        font-weight: 500;
+        line-height: 50px;
+        h1 {
+            @include heading-font;
+            font-weight: 700;
+          }
+        }
+      }
+
+
+
+
+
+
+}

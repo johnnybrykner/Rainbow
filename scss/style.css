@@ -321,6 +321,9 @@ hr {
 #posts .btn {
   margin: 3em 0; }
 
+@media (min-width: 992px) {
+  #posts .container {
+    width: 70%; } }
 .instafeed .btn {
   margin: 3em 0; }
 .instafeed .instafeed__images {
@@ -341,9 +344,13 @@ hr {
   .instafeed .instafeed__images {
     grid-template-columns: 1fr 1fr 1fr; } }
 #contact {
+  padding-bottom: 6em;
   background-color: #f8f9fa; }
   #contact a {
-    color: #E01734; }
+    color: #E01734;
+    margin: 1em 0; }
+  #contact h4 {
+    margin: 0.5em 0; }
 
 @media (min-width: 767px) {
   #contact h3 {
@@ -459,9 +466,33 @@ header.masthead-about {
   #support h3 {
     font-size: 2.5rem; } }
 .archive-container {
+  margin: 0 auto;
+  width: 70%;
   text-align: left; }
 
-#archive {
-  margin-top: 75px; }
-  #archive small {
-    font-family: 'Lora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; }
+#archive small {
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; }
+
+.masthead-news {
+  background-image: url("../img/news.png");
+  background-position: center;
+  background-size: contain;
+  color: white;
+  height: 80vh;
+  display: grid; }
+  .masthead-news .container {
+    height: 100%;
+    margin-top: 75px;
+    display: grid;
+    align-content: center; }
+    .masthead-news .container .intro-heading {
+      text-align: center;
+      align-items: center;
+      font-size: 50px;
+      font-weight: 500;
+      line-height: 50px; }
+      .masthead-news .container .intro-heading h1 {
+        font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+        font-weight: 700; }
+
+/*# sourceMappingURL=style.css.map */

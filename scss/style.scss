@@ -126,9 +126,7 @@ section {
     }
 }
 
-//#sendMessageButton a {color: white;}
-//#sendMessageButton {margin-top: 3rem;}
-// Highlight color customization
+
 ::-moz-selection {
     background: $primary;
     text-shadow: none;
@@ -223,6 +221,7 @@ img::-moz-selection {
             text-align: center;
             .btn{
               font-size: 120%;
+              margin-left:1em;
 
 
             }
@@ -311,6 +310,10 @@ img::-moz-selection {
                     position: relative;
                     padding: .1rem !important;
                     margin: 0 1em;
+
+                    &.visited:after {
+                      width: 100%;
+                    }
                 }
 
                 .nav-link:after {
@@ -447,12 +450,17 @@ header.masthead {
         display: flex;
         flex-flow: column nowrap;
         width: 100%;
-        button{
-
+        button {
           background: none;
           border: none;
-          img{
+
+          &.hidden {
+            opacity: 0;
+          }
+
+          img {
             width:3em;
+            transition: .5s ease;
           }
         }
 
@@ -486,32 +494,26 @@ header.masthead {
               text-align: center;
               background-color: $primary;
               display: grid;
-              padding:1em;
-
-
-
+              padding: 1em;
+              height: 100px;
 
                 h3 {
                     color: #fff;
                     margin:0;
-
-
-
                 }
 
             }
 
+            h4 {
+              font-weight: bolder;
+              font-size: 6rem;
+              text-align: center;
+              padding:0.2em;
+            }
 
-                            h4{
-                              font-weight: bolder;
-                              font-size: 6rem;
-                              text-align: center;
-                              padding:0.2em;
-                            }
-
-                            p{
-                              margin: 0 2em;
-                            }
+            p {
+              margin: 0 2em;
+            }
         }
     }
 }
@@ -607,6 +609,9 @@ hr {
 //--------------------------------------------------Styling for the contact section--------------------------------------------------
 #contact {
     background-color: $gray-100;
+    a{
+      color:$primary;
+    }
 
 
 
@@ -713,6 +718,7 @@ footer {
 
     a{
       justify-self:center;
+      align-self: baseline;
     }
 
 
@@ -726,7 +732,7 @@ footer {
     font-size: 1em;
     display:grid;
     text-align:left;
-    grid-template-columns: 2fr auto auto auto;
+    grid-template-columns: 2fr auto auto auto auto;
     grid-column-gap:3em;
   }
 
@@ -738,7 +744,7 @@ footer {
   }
   span.copyright{
     margin:4em 0 1em 0;
-    grid-column: 1/5;
+    grid-column: 1/6;
 
   }
 }

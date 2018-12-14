@@ -126,7 +126,8 @@ img::-moz-selection {
     #mainNav .navbar-nav .nav-item {
       text-align: center; }
       #mainNav .navbar-nav .nav-item .btn {
-        font-size: 120%; }
+        font-size: 120%;
+        margin-left: 1em; }
       #mainNav .navbar-nav .nav-item .nav-link {
         font-weight: bolder;
         font-size: 120%;
@@ -180,6 +181,8 @@ img::-moz-selection {
           position: relative;
           padding: .1rem !important;
           margin: 0 1em; }
+          #mainNav .navbar-nav .nav-item .nav-link.visited:after {
+            width: 100%; }
         #mainNav .navbar-nav .nav-item .nav-link:after {
           transition: all 0.25s;
           position: absolute;
@@ -253,8 +256,11 @@ header.masthead {
   #events .calendar button {
     background: none;
     border: none; }
+    #events .calendar button.hidden {
+      opacity: 0; }
     #events .calendar button img {
-      width: 3em; }
+      width: 3em;
+      transition: .5s ease; }
   #events .calendar figure:first-of-type {
     grid-area: one; }
   #events .calendar figure:nth-of-type(2) {
@@ -277,7 +283,8 @@ header.masthead {
       text-align: center;
       background-color: #E01734;
       display: grid;
-      padding: 1em; }
+      padding: 1em;
+      height: 100px; }
       #events .calendar .event-showcase .event__month h3 {
         color: #fff;
         margin: 0; }
@@ -335,6 +342,8 @@ hr {
     grid-template-columns: 1fr 1fr 1fr; } }
 #contact {
   background-color: #f8f9fa; }
+  #contact a {
+    color: #E01734; }
 
 @media (min-width: 767px) {
   #contact h3 {
@@ -384,7 +393,8 @@ footer {
   footer img {
     width: 20px; }
   footer a {
-    justify-self: center; }
+    justify-self: center;
+    align-self: baseline; }
   footer .btn {
     margin: 0;
     justify-self: end; }
@@ -393,7 +403,7 @@ footer {
     font-size: 1em;
     display: grid;
     text-align: left;
-    grid-template-columns: 2fr auto auto auto;
+    grid-template-columns: 2fr auto auto auto auto;
     grid-column-gap: 3em; }
   footer .footer-img {
     background-image: url("../img/footer-pattern-white.png");
@@ -402,7 +412,7 @@ footer {
     height: 100px; }
   footer span.copyright {
     margin: 4em 0 1em 0;
-    grid-column: 1/5; } }
+    grid-column: 1/6; } }
 header.masthead-about {
   height: 80vh;
   color: white;
@@ -455,5 +465,3 @@ header.masthead-about {
   margin-top: 75px; }
   #archive small {
     font-family: 'Lora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; }
-
-/*# sourceMappingURL=style.css.map */

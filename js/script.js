@@ -29,11 +29,7 @@
         $("body").removeClass("overflown");
         $(".burger-menu div").removeClass("change");
     });
-    /*// Activate scrollspy to add active class to navbar items on scroll
-    $('body').scrollspy({
-        target: '#mainNav',
-        offset: 56
-    });*/
+
 
     // Collapse Navbar
     var navbarCollapse = function () {
@@ -262,20 +258,19 @@
         labels = document.querySelectorAll(".event__month"),
         counter = 2;
 
-    console.log(boxes, wydarzenia);
-
     if (document.querySelector(".calendar")) {
-        if (counter > 1) {document.querySelector(".left").classList.add(".hidden")}
+        if (counter === 2) {document.querySelector(".left").classList.add("hidden")}
         document.querySelector(".right").addEventListener("click", function() {
-            if (counter < wydarzenia.length-counter) {
+            if (counter < wydarzenia.length-1) {
                 counter ++;
-                document.querySelector(".left").classList.remove(".hidden");
+
+                document.querySelector(".left").classList.remove("hidden");
+                if (counter === wydarzenia.length-1) {document.querySelector(".right").classList.add("hidden")}
                 let newOne = document.querySelector(".calendar").insertBefore(document.createElement("figure"), null);
                 newOne.classList.add("event-showcase");
 
                 boxes[0].parentNode.removeChild(boxes[0]);
                 boxes = document.querySelectorAll(".event-showcase");
-                console.log(boxes);
                 newOne.innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter].start)}</h3></section><h4>${dayize(wydarzenia[counter].start)}</h4><p>${wydarzenia[counter].title} ${wydarzenia[counter].venue}</p>`;
             }
         });
@@ -283,19 +278,37 @@
         document.querySelector(".left").addEventListener("click", function() {
             if (counter > 2) {
                 counter --;
-                console.log(counter);
+
+                document.querySelector(".right").classList.remove("hidden");
+                if (counter === 2) {document.querySelector(".left").classList.add("hidden")}
                 let newOne = document.querySelector(".calendar").insertBefore(document.createElement("figure"), null);
                 newOne.classList.add("event-showcase");
 
                 boxes[2].parentNode.removeChild(boxes[2]);
                 boxes = document.querySelectorAll(".event-showcase");
-                console.log(boxes);
                 boxes[1].innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter-1].start)}</h3></section><h4>${dayize(wydarzenia[counter-1].start)}</h4><p>${wydarzenia[counter-1].title} ${wydarzenia[counter-1].venue}</p>`;
                 boxes[0].innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter-2].start)}</h3></section><h4>${dayize(wydarzenia[counter-2].start)}</h4><p>${wydarzenia[counter-2].title} ${wydarzenia[counter-2].venue}</p>`;
                 newOne.innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter].start)}</h3></section><h4>${dayize(wydarzenia[counter].start)}</h4><p>${wydarzenia[counter].title} ${wydarzenia[counter].venue}</p>`;
             }
         });
     }
+
+//tf doesnt it work
+      for (let i=0; i<4; i++) {
+        document.querySelectorAll(".nav-link")[i].addEventListener("click", function(el) {
+          document.querySelectorAll(".nav-link")[i].classList.remove("visited");
+          el.target.classList.add("visited");
+        });
+      }
+
+      document.querySelector("#page-top").addEventListener("scroll", function() {
+        console.log("wassuh");
+        for (let i=0; i<4; i++) {
+          document.querySelectorAll(".nav-link")[i].classList.remove("visited");
+        };
+      })
+
+
 
 
 

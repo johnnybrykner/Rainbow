@@ -45,6 +45,7 @@
     $(window).scroll(navbarCollapse);
 
 
+
     /*--------------------------------------------------INSTAFEED--------------------------------------------------*/
     if (document.querySelector(".instafeed")) {
         feedTheInsta();
@@ -76,6 +77,7 @@
             };
         feed.run();
     }
+
 
 
     /*--------------------------------------------------Fetch WP--------------------------------------------------*/
@@ -148,7 +150,6 @@
         })
         .then(json => {
             appendWPpost(json);
-            console.log(json);
         });
 
     function appendWPpost(post) {
@@ -193,23 +194,57 @@
 
     function timize(date) {
         let split = date.split(/[-T\s]/g);
-        return split[3];
+        return split[3].split("").slice(0,5).join("");
     }
 
 
 
-    fetch('http://skif-patria.pl/wordpress/wp-json/tribe/events/v1/events')
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(json) {
-            appendEvents(json.events);
-            console.log(json.events);
-        });
+    /*--------------------------------------------------Event Swiping--------------------------------------------------*/
+
+    let wydarzenia = [],
+        boxes = [], //= document.querySelectorAll(".event-showcase"),
+        labels = [], //= document.querySelectorAll(".event__month"),
+        counter = 2,
+        mobile;
+
+    if (document.querySelector(".calendar")) {
+        if (window.innerWidth<992) {
+            boxes[0] = document.querySelector(".calendar").insertBefore(document.createElement("figure"), null);
+            boxes[0].classList.add("event-showcase");
+            labels[0] = document.querySelector(".event-showcase").insertBefore(document.createElement("section"), null);
+            labels[0].classList.add("event__month");
+            mobile = true;
+            counter = 0;
+        } else {
+            for (let i=0; i<3; i++) {
+                boxes[i] = document.querySelector(".calendar").insertBefore(document.createElement("figure"), null);
+                boxes[i].classList.add("event-showcase");
+                labels[i] = document.querySelectorAll(".event-showcase")[i].insertBefore(document.createElement("section"), null);
+                labels[i].classList.add("event__month");
+            }
+            mobile = false;
+            counter = 2;
+        }
+
+
+
+        fetch('http://skif-patria.pl/wordpress/wp-json/tribe/events/v1/events')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (json) {
+                appendEvents(json.events);
+            });
+    }
+
+
 
     function appendEvents(events) {
+
         for (let i = 0; i < events.length; i++) {
-            let event = {};
+            let event = {},
+                time;
+
             event.start = events[i].start_date;
             event.end = events[i].end_date;
             event.title = events[i].title;
@@ -220,46 +255,34 @@
             }
             //event.allDay = events[i].all_day;
             wydarzenia[i] = event;
+
+            if (timize(wydarzenia[i].start) === "00:00") {
+                time = "All day";
+            } else {
+                time = timize(wydarzenia[i].start) + " - " + timize(wydarzenia[i].end);
+            }
+            wydarzenia[i].time = time;
         }
 
         for (let i = 0; i < boxes.length; i++) {
             let day = dayize(wydarzenia[i].start),
-                month = monthize(wydarzenia[i].start),
-                time;
-            if (timize(wydarzenia[i].start) === "00:00:00") {
-                time = "All day";
-            } else {
-                time = timize(wydarzenia[i].start);
-            }
+                month = monthize(wydarzenia[i].start);
+
             labels[i].innerHTML = '<h3>' + month + '</h3>';
-            boxes[i].innerHTML += '<h4>' + day + '</h4>' + '<p>' + wydarzenia[i].title + wydarzenia[i].venue + ", " + time + '</p>';
+            boxes[i].innerHTML += '<h4>' + day + '</h4>' + '<p>' + wydarzenia[i].title + wydarzenia[i].venue + '</p>' + '<p>' + wydarzenia[i].time + '</p>';
         }
 
-        /*if (document.querySelector("#calendar")) {
-            $('#calendar').fullCalendar({
-                locale: "pl",
-                events: wydarzenia,
-                eventBackgroundColor: "#E01734",
-                eventTextColor: "white",
-                defaultView: 'agenda',
-                dayCount: 7,
-                height: 100,
-                allDayText: "They took our room"
-            });
-        }*/
-    }
+        if (counter === 2 || counter === 0) {document.querySelector(".left").classList.add("hidden")}
 
+        if (mobile===false) {
+            if (wydarzenia.length < 3) {
+                document.querySelector(".right").classList.add("hidden");
+                for (let i=wydarzenia.length; i<3; ++i) {
+                    labels[i].innerHTML = "<h3>More coming up</h3>";
+                }
+            }
+        }
 
-
-    /*--------------------------------------------------Event Swiping--------------------------------------------------*/
-
-    let wydarzenia = [],
-        boxes = document.querySelectorAll(".event-showcase"),
-        labels = document.querySelectorAll(".event__month"),
-        counter = 2;
-
-    if (document.querySelector(".calendar")) {
-        if (counter === 2) {document.querySelector(".left").classList.add("hidden")}
         document.querySelector(".right").addEventListener("click", function() {
             if (counter < wydarzenia.length-1) {
                 counter ++;
@@ -271,44 +294,50 @@
 
                 boxes[0].parentNode.removeChild(boxes[0]);
                 boxes = document.querySelectorAll(".event-showcase");
-                newOne.innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter].start)}</h3></section><h4>${dayize(wydarzenia[counter].start)}</h4><p>${wydarzenia[counter].title} ${wydarzenia[counter].venue}</p>`;
+                newOne.innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter].start)}</h3></section><h4>${dayize(wydarzenia[counter].start)}</h4><p>${wydarzenia[counter].title} ${wydarzenia[counter].venue}</p><p>${wydarzenia[counter].time}</p>`;
             }
         });
 
         document.querySelector(".left").addEventListener("click", function() {
-            if (counter > 2) {
-                counter --;
+            if (mobile===false) {
+                if (counter > 2) {
+                    counter --;
 
-                document.querySelector(".right").classList.remove("hidden");
-                if (counter === 2) {document.querySelector(".left").classList.add("hidden")}
-                let newOne = document.querySelector(".calendar").insertBefore(document.createElement("figure"), null);
-                newOne.classList.add("event-showcase");
+                    document.querySelector(".right").classList.remove("hidden");
+                    if (counter === 2) {document.querySelector(".left").classList.add("hidden")}
+                    let newOne = document.querySelector(".calendar").insertBefore(document.createElement("figure"), null);
+                    newOne.classList.add("event-showcase");
+                    boxes[2].parentNode.removeChild(boxes[2]);
+                    boxes = document.querySelectorAll(".event-showcase");
+                    boxes[1].innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter-1].start)}</h3></section><h4>${dayize(wydarzenia[counter-1].start)}</h4><p>${wydarzenia[counter-1].title} ${wydarzenia[counter-1].venue}</p><p>${wydarzenia[counter-1].time}</p>`;
+                    boxes[0].innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter-2].start)}</h3></section><h4>${dayize(wydarzenia[counter-2].start)}</h4><p>${wydarzenia[counter-2].title} ${wydarzenia[counter-2].venue}</p><p>${wydarzenia[counter-2].time}</p>`;
+                    newOne.innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter].start)}</h3></section><h4>${dayize(wydarzenia[counter].start)}</h4><p>${wydarzenia[counter].title} ${wydarzenia[counter].venue}</p><p>${wydarzenia[counter].time}</p>`;
+                }
+            } else {
+                if (counter > 0) {
+                    counter --;
 
-                boxes[2].parentNode.removeChild(boxes[2]);
-                boxes = document.querySelectorAll(".event-showcase");
-                boxes[1].innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter-1].start)}</h3></section><h4>${dayize(wydarzenia[counter-1].start)}</h4><p>${wydarzenia[counter-1].title} ${wydarzenia[counter-1].venue}</p>`;
-                boxes[0].innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter-2].start)}</h3></section><h4>${dayize(wydarzenia[counter-2].start)}</h4><p>${wydarzenia[counter-2].title} ${wydarzenia[counter-2].venue}</p>`;
-                newOne.innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter].start)}</h3></section><h4>${dayize(wydarzenia[counter].start)}</h4><p>${wydarzenia[counter].title} ${wydarzenia[counter].venue}</p>`;
+                    document.querySelector(".right").classList.remove("hidden");
+                    if (counter === 0) {document.querySelector(".left").classList.add("hidden")}
+                    let newOne = document.querySelector(".calendar").insertBefore(document.createElement("figure"), null);
+                    newOne.classList.add("event-showcase");
+                    boxes[0].parentNode.removeChild(boxes[0]);
+                    boxes = document.querySelectorAll(".event-showcase");
+                    newOne.innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter].start)}</h3></section><h4>${dayize(wydarzenia[counter].start)}</h4><p>${wydarzenia[counter].title} ${wydarzenia[counter].venue}</p><p>${wydarzenia[counter].time}</p>`;
+                }
             }
         });
     }
 
-//tf doesnt it work
-      for (let i=0; i<4; i++) {
+    for (let i=0; i<4; i++) {
         document.querySelectorAll(".nav-link")[i].addEventListener("click", function(el) {
-          document.querySelectorAll(".nav-link")[i].classList.remove("visited");
-          el.target.classList.add("visited");
+            let clicked = el.target;
+            for (let i = 0; i < 4; i++) {
+                document.querySelectorAll(".nav-link")[i].classList.remove("visited");
+            }
+            clicked.classList.add("visited");
         });
-      }
-
-      document.querySelector("#page-top").addEventListener("scroll", function() {
-        console.log("wassuh");
-        for (let i=0; i<4; i++) {
-          document.querySelectorAll(".nav-link")[i].classList.remove("visited");
-        };
-      })
-
-
+    }
 
 
 

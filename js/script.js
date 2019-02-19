@@ -202,12 +202,24 @@
     /*--------------------------------------------------Event Swiping--------------------------------------------------*/
 
     let wydarzenia = [],
-        boxes = [], //= document.querySelectorAll(".event-showcase"),
-        labels = [], //= document.querySelectorAll(".event__month"),
+        boxes = [],
+        labels = [],
         counter = 2,
         mobile;
 
     if (document.querySelector(".calendar")) {
+        fetch('http://skif-patria.pl/wordpress/wp-json/tribe/events/v1/events')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (json) {
+                appendEvents(json.events);
+            });
+    }
+
+
+
+    function appendEvents(events) {
         if (window.innerWidth<992) {
             boxes[0] = document.querySelector(".calendar").insertBefore(document.createElement("figure"), null);
             boxes[0].classList.add("event-showcase");
@@ -225,22 +237,7 @@
             mobile = false;
             counter = 2;
         }
-
-
-
-        fetch('http://skif-patria.pl/wordpress/wp-json/tribe/events/v1/events')
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (json) {
-                appendEvents(json.events);
-            });
-    }
-
-
-
-    function appendEvents(events) {
-
+        
         for (let i = 0; i < events.length; i++) {
             let event = {},
                 time;
@@ -253,7 +250,6 @@
             } else {
                 event.venue = "";
             }
-            //event.allDay = events[i].all_day;
             wydarzenia[i] = event;
 
             if (timize(wydarzenia[i].start) === "00:00") {
@@ -264,10 +260,9 @@
             wydarzenia[i].time = time;
         }
 
-        for (let i = 0; i < boxes.length; i++) {
+        for (let i = 0; i < 1; i++) {
             let day = dayize(wydarzenia[i].start),
                 month = monthize(wydarzenia[i].start);
-
             labels[i].innerHTML = '<h3>' + month + '</h3>';
             boxes[i].innerHTML += '<h4>' + day + '</h4>' + '<p>' + wydarzenia[i].title + wydarzenia[i].venue + '</p>' + '<p>' + wydarzenia[i].time + '</p>';
         }

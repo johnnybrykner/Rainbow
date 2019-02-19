@@ -1,21 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pl">
   <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Patria is a Polish non profit association who's mission is to promote Polish folk culture, traditions and heritage. We perform traditional songs and dances, organize workshops and cultural events.">
+    <meta name="description" content="Patria jest organizacją publiczną typu non-profit. Naszą misją jest promowanie polskiej kultury ludowej i pielęgnowanie naszego dziedzictwa.">
     <meta name="author" content="Patria">
-    <meta property="og:title" content="Patria - Polish Folk Culture Association">
-
+    <meta property="og:title" content="Patria - Stowarzyszenie Kultury i Folkloru">
     <meta property="og:url" content="http://skif-patria.pl/"/>
     <meta property="og:image" content="img/ogpatria.png"/>
     <meta property="og:site_name" content="Patria"/>
-
-    <meta property="og:description" content="Patria is a Polish non profit association who's mission is to promote Polish folk culture, traditions and heritage. We perform traditional songs and dances, organize workshops and cultural events."/>
-
-    <title>Patria - Polish Folk Culture Association</title>
+    <meta property="og:description" content="Patria jest organizacją publiczną typu non-profit. Naszą misją jest promowanie polskiej kultury ludowej i pielęgnowanie naszego dziedzictwa."/>
+    <title>Patria - Stowarzyszenie Kultury i Folkloru</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -24,14 +19,15 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Bitter:400,100,300,700' rel='stylesheet' type='text/css'>
-<link rel='stylesheet' href='fullcalendar.css' />
 
     <!-- Custom styles for this template -->
     <link href="scss/style.css" rel="stylesheet">
- <link rel="shortcut icon" href="img/logos/logo.png">
+    <link rel="shortcut icon" href="img/logos/logo.png">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
 
   <body id="page-top">
+    <div id="page">
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -46,24 +42,25 @@
         </div>
 
         </button>
+        <small id="lang-switch" @click="changeLang()">{{ langSwitch('nav_lang_switch') }}</small>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav text-uppercase ml-auto">
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#events">Events</a>
+              <a class="nav-link js-scroll-trigger" href="#events">{{ langSwitch('nav_item_events') }}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="archive.html">News</a>
+              <a class="nav-link js-scroll-trigger" href="archive.html">{{ langSwitch('nav_item_news') }}</a>
             </li>
             <li class="nav-item">
 
-              <a class="nav-link js-scroll-trigger" href="about.html">About</a>
+              <a class="nav-link js-scroll-trigger" href="about.html">{{ langSwitch('nav_item_about') }}</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="about.html#contact">Contact</a>
+              <a class="nav-link js-scroll-trigger" href="about.html#contact">{{ langSwitch('nav_item_contact') }}</a>
             </li>
             <li class="nav-item">
-              <a class="btn btn-outline-primary btn-sm support" href="about.html#support">Support Patria</a>
+              <a class="btn btn-outline-primary btn-sm support" href="about.html#support">{{ langSwitch('nav_item_support') }}</a>
             </li>
           </ul>
         </div>
@@ -78,7 +75,7 @@
             <img class="intro-image" src="img/patria.png" alt="">
           </div>
           <div class="intro-text__halo">
-            <div class="intro-lead-in">We are</div>
+            <div class="intro-lead-in">{{ langSwitch('index_header_weare') }}</div>
             <div class="intro-heading text-uppercase">Patria</div>
           </div>
         </div>
@@ -92,7 +89,7 @@
 
     <!-- Eventz -->
     <section id="events">
-          <h2 class="section-heading text-bolder text-center">Upcoming events</h2>
+          <h2 class="section-heading text-bolder text-center">{{ langSwitch('index_events_heading') }}</h2>
 
           <section class="calendar">
 
@@ -108,7 +105,7 @@
      <!-- WP POSTZ -->
     <section class="bg-light posts" id="posts">
       <div class="container container-posts">
-        <h2 class="section-heading text-bolder text-center">News</h2>
+        <h2 class="section-heading text-bolder text-center">{{ langSwitch('index_posts_heading') }}</h2>
       </div>
 
       <div class="container posts-container">
@@ -116,7 +113,7 @@
 
 </div>
 <div class="text-center">
-  <a href="archive.html"><button class="btn btn-primary btn-md text-uppercase ">Older posts →</button></a>
+  <a href="archive.html"><button class="btn btn-primary btn-md text-uppercase ">{{ langSwitch('index_posts_button_older') }}</button></a>
 </div>
 
 
@@ -126,11 +123,11 @@
 
     <section class="instafeed">
       <div class="container">
-        <h2 class="section-heading text-bolder text-center">Patria on Instagram<a href="https://www.instagram.com/skif_patria/"></a></h2>
+        <h2 class="section-heading text-bolder text-center">{{ langSwitch('index_insta_heading') }}<a href="https://www.instagram.com/skif_patria/"></a></h2>
         <div class="instafeed__images"></div>
         <div class="col-lg-12 text-center">
           <div class="text-center"></div>
-          <a href="https://www.instagram.com/skif_patria/" target="_blank"><button class="btn btn-primary btn-md text-uppercase">MORE ON INSTAGRAM</button></a>
+          <a href="https://www.instagram.com/skif_patria/" target="_blank"><button class="btn btn-primary btn-md text-uppercase">{{ langSwitch('index_insta_button_more') }}</button></a>
         </div>
       </div>
     </section>
@@ -154,39 +151,29 @@
                 <a href="tel:‭+48-790-844-841"> <img src="img/phone.svg">‭+48 790 844 841‬‬</a>
 
                 <div>
-                    <a class="btn btn-outline-primary btn-sm btn-footer" href="about.html#support">Support Patria</a>
+                    <a class="btn btn-outline-primary btn-sm btn-footer" href="about.html#support">{{ langSwitch('footer_button_support') }}</a>
 
                 </div>
 
-                <span class="copyright">Copyright &copy; Patria 2018</span>
+                <span class="copyright">{{ langSwitch('footer_copyright') }}</span>
             </div>
         </div>
 
         <div class="footer-img"> </div>
 
     </footer>
+  </div>
 
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <!-- Bootstrap core JavaScript -->
     <script src='js/jquery.min.js'></script>
-    <!--<script src='js/moment.min.js'></script>-->
-    <!--<script src="js/pl.js"></script>-->
-    <!--<script src='js/fullcalendar.min.js'></script>-->
     <script src="js/instafeed.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Plugin JavaScript -->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-
     <script src="js/script.js"></script>
-
-
-
+    <script src="js/dictionary.js"></script>
   </body>
 
 </html>

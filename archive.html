@@ -1,35 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title> News archive | Patria - Polish Folk Culture Association</title>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Patria is a Polish non profit association who's mission is to promote Polish folk culture, traditions and heritage. We perform traditional songs and dances, organize workshops and cultural events.">
+    <meta name="description" content="Patria jest organizacją publiczną typu non-profit. Naszą misją jest promowanie polskiej kultury ludowej i pielęgnowanie naszego dziedzictwa.">
     <meta name="author" content="Patria">
-    <meta property="og:title" content="News archive | Patria - Polish Folk Culture Association">
-
-    <meta property="og:url" content="http://skif-patria.pl/" />
-    <meta property="og:image" content="img/ogpatria.png" />
-    <meta property="og:site_name" content="Patria" />
-
-    <meta property="og:description" content="Patria is a Polish non profit association who's mission is to promote Polish folk culture, traditions and heritage. We perform traditional songs and dances, organize workshops and cultural events." />
+    <meta property="og:title" content="Patria - Stowarzyszenie Kultury i Folkloru">
+    <meta property="og:url" content="http://skif-patria.pl/"/>
+    <meta property="og:image" content="img/ogpatria.png"/>
+    <meta property="og:site_name" content="Patria"/>
+    <meta property="og:description" content="Patria jest organizacją publiczną typu non-profit. Naszą misją jest promowanie polskiej kultury ludowej i pielęgnowanie naszego dziedzictwa."/>
+    <title>Archiwum Nowości | Patria - Stowarzyszenie Kultury i Folkloru</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Bitter:400,100,300,700' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Bitter:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Custom styles for this template -->
     <link href="scss/style.css" rel="stylesheet">
     <link rel="shortcut icon" href="img/logos/logo.png">
-</head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
 
 <body id="page-top">
-
-
+    <div id="page">
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top" id="mainNav">
@@ -44,24 +42,25 @@
             </div>
 
         </button>
+        <small id="lang-switch" @click="changeLang()">{{ langSwitch('nav_lang_switch') }}</small>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="index.html#events">Events</a>
+                        <a class="nav-link js-scroll-trigger" href="index.html#events">{{ langSwitch('nav_item_events') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger visited" href="index.html#posts">News</a>
+                        <a class="nav-link js-scroll-trigger visited" href="index.html#posts">{{ langSwitch('nav_item_news') }}</a>
                     </li>
                     <li class="nav-item">
 
-                        <a class="nav-link js-scroll-trigger" href="about.html">About</a>
+                        <a class="nav-link js-scroll-trigger" href="about.html">{{ langSwitch('nav_item_about') }}</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="about.html#contact">Contact</a>
+                        <a class="nav-link js-scroll-trigger" href="about.html#contact">{{ langSwitch('nav_item_contact') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-primary btn-sm support" href="about.html#support">Support Patria</a>
+                        <a class="btn btn-outline-primary btn-sm support" href="about.html#support">{{ langSwitch('nav_item_support') }}</a>
                     </li>
                 </ul>
             </div>
@@ -76,7 +75,7 @@
         <div class="container">
 
             <div class="intro-heading text-uppercase">
-                <h1>NEWS ARCHIVE</h1>
+                <h1>{{ langSwitch('archive_header_heading') }}</h1>
             </div>
         </div>
 
@@ -121,19 +120,19 @@
                 <a href="tel:‭+48-790-844-841"> <img src="img/phone.svg">‭+48 790 844 841‬‬</a>
 
                 <div>
-                    <a class="btn btn-outline-primary btn-sm btn-footer" href="about.html#support">Support Patria</a>
+                    <a class="btn btn-outline-primary btn-sm btn-footer" href="about.html#support">{{ langSwitch('footer_button_support') }}</a>
 
                 </div>
 
-                <span class="copyright">Copyright &copy; Patria 2018</span>
+                <span class="copyright">{{ langSwitch('footer_copyright') }}</span>
             </div>
         </div>
 
         <div class="footer-img"> </div>
 
     </footer>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <!-- Bootstrap core JavaScript -->
     <script src='js/jquery.min.js'></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -146,8 +145,6 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/script.js"></script>
-
-
-
+    <script src="js/dictionary.js"></script>
 </body>
 </html>

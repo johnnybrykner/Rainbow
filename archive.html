@@ -23,7 +23,7 @@
     <!-- Custom styles for this template -->
     <link href="scss/style.css" rel="stylesheet">
     <link rel="shortcut icon" href="img/logos/logo.png">
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   </head>
 
 <body id="page-top">
@@ -31,18 +31,21 @@
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top" id="mainNav">
+        <small class="lang-switch" @click="changeLang()">{{ langSwitch('nav_lang_switch') }}</small>
         <div class="container">
             <a class="navbar-brand js-scroll-trigger" href="index.html"><img class="navbar-logo" src="img/logos/logo.png" alt=""><p>PATRIA</p></a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <div class="burger-menu">
-
-                <div class="burger-line1"></div>
-                <div class="burger-line2"></div>
-                <div class="burger-line3"></div>
-            </div>
-
-        </button>
-        <small id="lang-switch" @click="changeLang()">{{ langSwitch('nav_lang_switch') }}</small>
+            <section class="navbar--right-part">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                  <div class="burger-menu">
+      
+                  <div class="burger-line1"></div>
+                  <div class="burger-line2"></div>
+                  <div class="burger-line3"></div>
+                  </div>
+                </button>
+                <img src="img/uk.png" alt="UK flag" class="lang-switch" @click="changeLang()" v-if="lang==='pl'">
+                <img src="img/pl.png" alt="Poland flag" class="lang-switch" @click="changeLang()" v-else>
+            </section>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
                     <li class="nav-item">
@@ -124,7 +127,7 @@
 
                 </div>
 
-                <span class="copyright">{{ langSwitch('footer_copyright') }}</span>
+                <span class="copyright">&copy;{{ langSwitch('footer_copyright') }}</span>
             </div>
         </div>
 

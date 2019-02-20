@@ -164,6 +164,13 @@ img::-moz-selection {
 
 #mainNav {
     background-color: $gray-100;
+    justify-content: space-around;
+
+    small.lang-switch {
+      cursor: pointer;
+      display: none;
+    }
+
     .burger-menu {
         display: inline-block;
         grid-template-rows: 1fr 1fr 1fr;
@@ -174,24 +181,37 @@ img::-moz-selection {
     .burger-line2,
     .burger-line3 {
         height: 3px;
-        width: 25px;
+        width: 24px;
         background-color: $gray-900;
         margin: 4px 0;
         border-radius: 1px;
         transition: 0.5s all;
     }
 
+    .navbar--right-part {
+      padding: 0;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
 
-    .navbar-toggler {
+      .lang-switch {
+        cursor: pointer;
+        padding: 0 0 0 .5rem;
+        margin: .5px 0;
+      }
+
+      .navbar-toggler {
         font-size: 30px;
         right: 0;
-        padding: 13px;
+        padding: 0 .5rem 0 0;
         text-transform: uppercase;
         color: black;
         border: 0;
         @include heading-font;
-
-    }
+        display: flex;
+        align-items: center;
+      }
+  }
 
     .navbar-brand {
         color: $gray-900;
@@ -272,6 +292,17 @@ img::-moz-selection {
         border: none;
         background-color: white;
 
+        small.lang-switch {
+          font-weight: bold;
+          font-size: 1rem;
+          display: block;
+          align-self: center;
+        }
+
+        .navbar--right-part {
+          display: none;
+        }
+
         .navbar-brand {
 
             font-size: 2em;
@@ -302,7 +333,6 @@ img::-moz-selection {
 
             .nav-item {
               align-self: center;
-                &.support {}
 
                 .nav-link {
 
@@ -835,25 +865,17 @@ header.masthead-about {
     }
     #about1,
     #support {
-
-
-
         h1 {
-            margin: 4rem 0;
-            font-size: 2.5rem;
+          margin: 4rem 0;
+          font-size: 2.5rem;
         }
         .container {
             width: 70%;
         }
         h3 {
-
-            font-size: 2.5rem;
-
-
+          font-size: 2.5rem;
         }
-        .card {}
     }
-
 }
 
 

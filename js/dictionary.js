@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         en: 'Upcoming events',
                     },
                     index_posts_heading: {
-                        pl: 'Nowości',
+                        pl: 'Posty',
                         en: 'News',
                     },
                     index_posts_button_older: {
@@ -92,6 +92,18 @@ document.addEventListener("DOMContentLoaded", function() {
                     about_contact_collab: {
                         pl: 'Będziemy bardzo szczęśliwi mogąc wystąpić na Twojej imprezie. Jeśli masz jakiś projekt lub pomysł, w którym moglibyśmy Ci pomóc, nie wahaj się - napisz do nas wiadomość!',
                         en: 'We would be more than happy to perform at your event. If you have any project or an idea on your mind that we could help you with, don\'t be shy - shoot us a message!',
+                    },
+                    about_contact_email: {
+                        pl: 'Wyślij do nas e-mail',
+                        en: 'Email us',
+                    },
+                    about_contact_call: {
+                        pl: 'Zadzwoń do nas',
+                        en: 'Call us',
+                    },
+                    about_contact_follow: {
+                        pl: 'Obserwuj nas na Instagramie',
+                        en: 'Follow us on Instagram',
                     },
                     archive_header_heading: {
                         pl: 'ARCHIWUM NOWOŚCI',

@@ -23,27 +23,30 @@
     <!-- Custom styles for this template -->
     <link href="scss/style.css" rel="stylesheet">
     <link rel="shortcut icon" href="img/logos/logo.png">
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   </head>
 
 <body id="page-top">
 <div id="page">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <small class="lang-switch" @click="changeLang()">{{ langSwitch('nav_lang_switch') }}</small>
         <div class="container">
             <a class="navbar-brand js-scroll-trigger" href="index.html"><img class="navbar-logo" src="img/logos/logo.png" alt="">
                 <p>PATRIA</p>
             </a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-
-              <div class="burger-menu">
-
-              <div class="burger-line1"></div>
-              <div class="burger-line2"></div>
-              <div class="burger-line3"></div>
-            </div>
-            </button>
-            <small id="lang-switch" @click="changeLang()">{{ langSwitch('nav_lang_switch') }}</small>
+            <section class="navbar--right-part">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                  <div class="burger-menu">
+      
+                  <div class="burger-line1"></div>
+                  <div class="burger-line2"></div>
+                  <div class="burger-line3"></div>
+                  </div>
+                </button>
+                <img src="img/uk.png" alt="UK flag" class="lang-switch" @click="changeLang()" v-if="lang==='pl'">
+                <img src="img/pl.png" alt="Poland flag" class="lang-switch" @click="changeLang()" v-else>
+            </section>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
                     <li class="nav-item">
@@ -162,15 +165,15 @@
 
 <div class="row">
           <div class="col-sm-4">
-            <h4 class="">Email us</h4>
+            <h4 class="">{{ langSwitch('about_contact_email') }}</h4>
             <span><a href="mailto:skif_patria@wp.pl">skif_patria@wp.pl</a></span>
           </div>
             <div class="col-sm-4">
-            <h4>Call us</h4>
+            <h4>{{ langSwitch('about_contact_call') }}</h4>
             <span><a href="tel:‭+48-790-844-841">‭+48 790 844 841‬‬</a></span>
           </div>
             <div class="col-sm-4">
-            <h4>Follow us</h4>
+            <h4>{{ langSwitch('about_contact_follow') }}</h4>
             <span> <a href="https://www.instagram.com/skif_patria/" target="_blank"> @skif_patria</a>  </span>
           </div>
           </div>
@@ -200,7 +203,7 @@
 
                 </div>
 
-                <span class="copyright">{{ langSwitch('footer_copyright') }}</span>
+                <span class="copyright">&copy;{{ langSwitch('footer_copyright') }}</span>
             </div>
         </div>
 

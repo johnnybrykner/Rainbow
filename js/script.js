@@ -183,7 +183,7 @@
 
     function monthize(date) {
         let split = date.split(/[-T\s]/g),
-            monthnames = ["0", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            monthnames = ["0", "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
         return monthnames[Number(split[1])] + ", " + split[0];
     }
 
@@ -268,12 +268,15 @@
         }
 
         if (counter === 2 || counter === 0) {document.querySelector(".left").classList.add("hidden")}
-
+        if (mobile===true) {
+            if (wydarzenia.length === 1) {document.querySelector(".right").classList.add("hidden")}
+        }
+        
         if (mobile===false) {
             if (wydarzenia.length < 3) {
                 document.querySelector(".right").classList.add("hidden");
                 for (let i=wydarzenia.length; i<3; ++i) {
-                    labels[i].innerHTML = "<h3>More coming up</h3>";
+                    labels[i].innerHTML = "<h3>Więcej nadchodzi</h3>";
                 }
             }
         }

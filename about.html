@@ -30,7 +30,6 @@
 <div id="page">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-        <small class="lang-switch" @click="changeLang()">{{ langSwitch('nav_lang_switch') }}</small>
         <div class="container">
             <a class="navbar-brand js-scroll-trigger" href="index.html"><img class="navbar-logo" src="img/logos/logo.png" alt="">
                 <p>PATRIA</p>
@@ -50,7 +49,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="index.html#events">{{ langSwitch('nav_item_events') }}</a>
+                        <a class="nav-link js-scroll-trigger" href="index.html#calendar">{{ langSwitch('nav_item_events') }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="archive.html">{{ langSwitch('nav_item_news') }}</a>
@@ -69,6 +68,7 @@
                 </ul>
             </div>
         </div>
+        <small class="lang-switch" @click="changeLang()">{{ langSwitch('nav_lang_switch') }}</small>
     </nav>
 
     <!-- Header -->
@@ -111,7 +111,7 @@
 
             <h3>{{ langSwitch('about_section_two_heading') }}</h3>
 
-            <p>
+            <p id="support">
                 {{ langSwitch('about_section_two_descr') }}
             </p>
 
@@ -121,7 +121,7 @@
 
 
 
-    <section id="support">
+    <section class="krs">
         <div class="container">
 
 

@@ -31,7 +31,6 @@
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-      <small class="lang-switch" @click="changeLang()">{{ langSwitch('nav_lang_switch') }}</small>
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="index.html"><img class="navbar-logo" src="img/logos/logo.png" alt=""><p>PATRIA</p></a>
         <section class="navbar--right-part">
@@ -49,7 +48,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav text-uppercase ml-auto">
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#events">{{ langSwitch('nav_item_events') }}</a>
+              <a class="nav-link js-scroll-trigger" href="#calendar">{{ langSwitch('nav_item_events') }}</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="archive.html">{{ langSwitch('nav_item_news') }}</a>
@@ -68,6 +67,7 @@
           </ul>
         </div>
       </div>
+      <small class="lang-switch" @click="changeLang()">{{ langSwitch('nav_lang_switch') }}</small>
     </nav>
 
     <!-- Header -->
@@ -79,7 +79,7 @@
           </div>
           <div class="intro-text__halo">
             <div class="intro-lead-in">{{ langSwitch('index_header_weare') }}</div>
-            <div class="intro-heading text-uppercase">Patria</div>
+            <div class="intro-heading text-uppercase" id="calendar">Patria</div>
           </div>
         </div>
       </div>

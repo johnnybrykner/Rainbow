@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
         el: '#page',
         data() {
             return {
-                lang: 'pl',
+                lang: localStorage.getItem('lang') ? localStorage.getItem('lang') : 'pl',
                 texts: {
                     nav_lang_switch: {
                         pl: 'EN',
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         en: 'Upcoming events',
                     },
                     index_posts_heading: {
-                        pl: 'Posty',
+                        pl: 'Najnowsze posty',
                         en: 'News',
                     },
                     index_posts_button_older: {
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         en: 'Patria is a non-profit public organization. Founded in 2005, it consists of former members of a Polish student folk song and dance ensemble “Katowice”.',
                     },
                     about_section_two_heading: {
-                        pl: 'Naszą misja',
+                        pl: 'Nasza misja',
                         en: 'Our mission',
                     },
                     about_section_two_descr: {
@@ -118,6 +118,7 @@ document.addEventListener("DOMContentLoaded", function() {
             },
             changeLang() {
                 this.lang === 'pl' ? this.lang = 'en' : this.lang = 'pl';
+                localStorage.setItem('lang', this.lang);
             }
         }
     })

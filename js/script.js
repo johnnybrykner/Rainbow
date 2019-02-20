@@ -35,8 +35,10 @@
     var navbarCollapse = function () {
         if ($("#mainNav").offset().top > 100) {
             $("#mainNav").addClass("navbar-shrink");
+            $("body").addClass("margined");
         } else {
             $("#mainNav").removeClass("navbar-shrink");
+            $("body").removeClass("margined");
         }
     };
     // Collapse now if page is not at top
@@ -178,7 +180,7 @@
 
     function humanize(date) {
         let split = date.split(/[-T\s]/g);
-        return `Published ${split[2]}.${split[1]}.${split[0]} at ${split[3]}`;
+        return `Opublikowane ${split[2]}.${split[1]}.${split[0]} o ${split[3]}`;
     }
 
     function monthize(date) {
@@ -246,21 +248,21 @@
             event.end = events[i].end_date;
             event.title = events[i].title;
             if (events[i].venue.length !== 0) {
-                event.venue = ' at ' + events[i].venue.venue + ", " + events[i].venue.city;
+                event.venue = ' w ' + events[i].venue.venue + ", " + events[i].venue.city;
             } else {
                 event.venue = "";
             }
             wydarzenia[i] = event;
 
             if (timize(wydarzenia[i].start) === "00:00") {
-                time = "All day";
+                time = "Cały dzień";
             } else {
                 time = timize(wydarzenia[i].start) + " - " + timize(wydarzenia[i].end);
             }
             wydarzenia[i].time = time;
         }
 
-        for (let i = 0; i < 1; i++) {
+        for (let i = 0; i < boxes.length; i++) {
             let day = dayize(wydarzenia[i].start),
                 month = monthize(wydarzenia[i].start);
             labels[i].innerHTML = '<h3>' + month + '</h3>';

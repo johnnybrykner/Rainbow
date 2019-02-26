@@ -1,19 +1,14 @@
-(function ($) {
+document.addEventListener("DOMContentLoaded", function() {
     "use strict"; // Start of use strict
 
-    // Smooth scrolling using jQuery easing
-    $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function () {
-        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-            var target = $(this.hash);
-            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-            if (target.length) {
-                $('html, body').animate({
-                    scrollTop: (target.offset().top - 54)
-                }, 1000, "easeInOutExpo");
-                return false;
-            }
+    // Smooth scrolling  
+    setTimeout(function(){
+        for (let i=0; i<=2; i++) {
+            document.querySelectorAll(".nav-item")[i].addEventListener("click", function(e) {
+                console.log(e);
+            })
         }
-    });
+    }, 10);
 
     // Closes responsive menu when a scroll trigger link is clicked
     $('.js-scroll-trigger').click(function () {
@@ -29,7 +24,6 @@
         $("body").removeClass("overflown");
         $(".burger-menu div").removeClass("change");
     });
-
 
     // Collapse Navbar
     var navbarCollapse = function () {
@@ -332,6 +326,7 @@
     for (let i=0; i<4; i++) {
         document.querySelectorAll(".nav-link")[i].addEventListener("click", function(el) {
             let clicked = el.target;
+            console.log(el);
             for (let i = 0; i < 4; i++) {
                 document.querySelectorAll(".nav-link")[i].classList.remove("visited");
             }
@@ -341,4 +336,4 @@
 
 
 
-})(jQuery); // End of use strict
+}); // End of use strict

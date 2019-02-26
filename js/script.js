@@ -1,38 +1,40 @@
 document.addEventListener("DOMContentLoaded", function() {
     "use strict"; // Start of use strict
 
-    // Smooth scrolling  
     setTimeout(function(){
+        // Smooth scrolling  
         for (let i=0; i<=2; i++) {
-            document.querySelectorAll(".nav-item")[i].addEventListener("click", function(e) {
-                console.log(e);
+            document.querySelectorAll(".link--redirect")[i].addEventListener("click", function() {
+                localStorage.removeItem('scroll');
+            })
+
+            document.querySelectorAll(".link--scroll")[i].addEventListener("click", function(e) {
+                if (window.location.href === e.target.href) { e.preventDefault() };
+                localStorage.setItem('scroll', e.target.getAttribute('el'));
+                document.getElementById(localStorage.getItem('scroll')).scrollIntoView({behavior: 'smooth', block: 'center'});
             })
         }
+        document.getElementById(localStorage.getItem('scroll')).scrollIntoView({behavior: 'smooth', block: 'center'});
+
+        // Closes responsive menu when a scroll trigger link is clicked
+        $(".navbar-toggler").click(function () {
+            $(".burger-line1, .burger-line2, .burger-line3").toggleClass("change");
+            $("body").toggleClass("overflown");
+        });
+
+        $(".nav-link").click(function () {
+            $("body").removeClass("overflown");
+            $(".burger-menu div").removeClass("change");
+            $('.navbar-collapse').collapse('hide');
+        });
     }, 10);
-
-    // Closes responsive menu when a scroll trigger link is clicked
-    $('.js-scroll-trigger').click(function () {
-        $('.navbar-collapse').collapse('hide');
-    });
-
-    $(".navbar-toggler").click(function () {
-        $(".burger-line1, .burger-line2, .burger-line3").toggleClass("change");
-        $("body").toggleClass("overflown");
-    });
-
-    $(".nav-link").click(function () {
-        $("body").removeClass("overflown");
-        $(".burger-menu div").removeClass("change");
-    });
 
     // Collapse Navbar
     var navbarCollapse = function () {
         if ($("#mainNav").offset().top > 100) {
             $("#mainNav").addClass("navbar-shrink");
-            $("body").addClass("margined");
         } else {
             $("#mainNav").removeClass("navbar-shrink");
-            $("body").removeClass("margined");
         }
     };
     // Collapse now if page is not at top
@@ -73,72 +75,6 @@ document.addEventListener("DOMContentLoaded", function() {
             };
         feed.run();
     }
-
-
-
-    /*--------------------------------------------------Fetch WP--------------------------------------------------*/
-
-    /*let begin = [],
-        end = [],
-        machineBegin = [],
-        machineEnd = [],
-        events = [];
-
-    fetch("http://skif-patria.pl/wordpress/wp-json/wp/v2/tags")
-        .then(function (response) {
-            return response.json();
-        })
-        .then(json => {
-            appendWPtag(json);
-        });
-
-    function appendWPtag(tag) {
-        console.log(tag);
-      let crudeBegin = [],
-          crudeMachineBegin = [],
-          crudeEnd = [],
-          crudeMachineEnd = [];
-      for (let i = 0; i < Object.keys(tag).length; i+=2) {
-          crudeBegin[i] = tag[i].name;
-          crudeMachineBegin[i] = machinerize(tag[i].name);
-      }
-      begin = crudeBegin.filter(function(el) {
-          return el != "";
-      });
-        machineBegin = crudeMachineBegin.filter(function(el) {
-            return el != "";
-        });
-      for (let i = 1; i < Object.keys(tag).length; i+=2) {
-          crudeEnd[i] = tag[i].name;
-          crudeMachineEnd[i] = machinerize(tag[i].name);
-      }
-      end = crudeEnd.filter(function(el) {
-          return el != "";
-      });
-        machineEnd = crudeMachineEnd.filter(function(el) {
-            return el != "";
-        });
-
-        generateEvents();
-        initialize();
-    }
-
-    function machinerize(date) {
-        let split = date.split(/[.\s]/g);
-        return `${split[2]}-${split[1]}-${split[0]}T${split[3]}:00.000`;
-    }
-
-    function generateEvents() {
-        for (let i = 0; i < begin.length; i++) {
-            events[i]={
-                title: "Wydarzenie",
-                start: machineBegin[i],
-                end: machineEnd[i]
-            }
-        }
-    }*/
-
-
 
     fetch("http://skif-patria.pl/wordpress/wp-json/wp/v2/posts")
         .then(function (response) {
@@ -322,18 +258,4 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
-
-    for (let i=0; i<4; i++) {
-        document.querySelectorAll(".nav-link")[i].addEventListener("click", function(el) {
-            let clicked = el.target;
-            console.log(el);
-            for (let i = 0; i < 4; i++) {
-                document.querySelectorAll(".nav-link")[i].classList.remove("visited");
-            }
-            clicked.classList.add("visited");
-        });
-    }
-
-
-
 }); // End of use strict

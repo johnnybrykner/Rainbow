@@ -166,7 +166,7 @@ img::-moz-selection {
     background-color: $gray-100;
     justify-content: space-around;
 
-    small.lang-switch {
+    .lang-switch-desk {
       cursor: pointer;
       display: none;
     }
@@ -241,7 +241,6 @@ img::-moz-selection {
             text-align: center;
             .btn{
               font-size: 120%;
-              margin-left:1em;
 
 
             }
@@ -292,11 +291,8 @@ img::-moz-selection {
         border: none;
         background-color: white;
 
-        small.lang-switch {
-          font-weight: bold;
-          font-size: 1rem;
+        .lang-switch-desk {
           display: block;
-          align-self: center;
         }
 
         .navbar--right-part {
@@ -398,6 +394,7 @@ header.masthead {
         margin-top: 75px;
         display: grid;
         align-content: center;
+        padding: 0;
 
 
         .intro-text {
@@ -473,7 +470,7 @@ header.masthead {
 
 //--------------------------------------------------Styling for the calendar section--------------------------------------------------
 
-#events {
+#calendar {
 
     .calendar {
         display: grid;
@@ -547,7 +544,7 @@ header.masthead {
 }
 
 @media(min-width:768px) {
-    #events {
+    #calendar {
 
         .calendar {
             grid-gap: 1rem;
@@ -823,6 +820,7 @@ header.masthead-about {
             h1 {
                 @include heading-font;
                 font-weight: 700;
+                font-size: 2rem;
             }
         }
     }

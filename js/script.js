@@ -1,6 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
     "use strict"; // Start of use strict
 
+    window.onload = function() {
+        if (document.getElementById(localStorage.getItem('scroll'))) {
+            document.getElementById(localStorage.getItem('scroll')).scrollIntoView({behavior: 'smooth', block: 'center'})
+        };
+    };
+
     setTimeout(function(){
         // Smooth scrolling  
         for (let i=0; i<=2; i++) {
@@ -14,9 +20,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById(localStorage.getItem('scroll')).scrollIntoView({behavior: 'smooth', block: 'center'});
             })
         }
-        if (document.getElementById(localStorage.getItem('scroll'))) {
-            document.getElementById(localStorage.getItem('scroll')).scrollIntoView({behavior: 'smooth', block: 'center'})
-        };
 
         // Closes responsive menu when a scroll trigger link is clicked
         $(".navbar-toggler").click(function () {

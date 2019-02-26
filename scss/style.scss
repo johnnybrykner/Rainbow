@@ -371,6 +371,15 @@ img::-moz-selection {
 
     }
 
+    #support {
+      .row {
+        flex-wrap: nowrap;
+
+        .col-lg-5 {
+          margin-bottom: 0;
+        }
+    }
+  }
 }
 
 
@@ -662,6 +671,12 @@ hr {
 
   }
 
+  .krs {
+    .col-lg-5 {
+        margin-bottom: 2rem;
+      }
+  }
+
 
 
 
@@ -872,7 +887,13 @@ header.masthead-about {
           font-size: 2.5rem;
         }
         .container {
-            width: 70%;
+          width: 70%;
+
+          .support-image-card {
+            display: flex;
+            justify-content: end;
+            flex-flow: column;
+          }
         }
         h3 {
           font-size: 2.5rem;

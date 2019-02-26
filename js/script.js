@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
             $("body").toggleClass("overflown");
         });
 
-        $(".nav-link").click(function () {
+        $(".nav-link, .btn-sm").click(function () {
             $("body").removeClass("overflown");
             $(".burger-menu div").removeClass("change");
             $('.navbar-collapse').collapse('hide');

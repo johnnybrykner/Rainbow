@@ -85,6 +85,10 @@ document.addEventListener("DOMContentLoaded", function() {
                         pl: 'Potrzebujemy Twojego wsparcia, aby nasza rodzina mogła się rozwijać. Organizacja pokazów i warsztatów kosztuje nie tylko czas, ale i pieniądze. Wesprzyj nas przekazując 1% swojego podatku. Ciebie to nic nie kosztuje a nam bardzo pomaga.',
                         en: 'We need your support to keep our family growing. Organizing shows and workshop costs not only time, but also money. Support us by donating 1% of your tax. It doesn\'t cost you anything, but it helps us a lot.',
                     },
+                    about_support_transfer: {
+                        pl: 'Możesz również użyć naszego konta wpłacając dowolną kwotę. Dziękujemy!',
+                        en: 'You can also use our account and deposit any amount. Thank you!',
+                    },
                     about_contact_heading: {
                         pl: 'Skontaktuj się z nami!',
                         en: 'Contact us',

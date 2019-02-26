@@ -14,7 +14,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById(localStorage.getItem('scroll')).scrollIntoView({behavior: 'smooth', block: 'center'});
             })
         }
-        document.getElementById(localStorage.getItem('scroll')).scrollIntoView({behavior: 'smooth', block: 'center'});
+        if (document.getElementById(localStorage.getItem('scroll'))) {
+            document.getElementById(localStorage.getItem('scroll')).scrollIntoView({behavior: 'smooth', block: 'center'})
+        };
 
         // Closes responsive menu when a scroll trigger link is clicked
         $(".navbar-toggler").click(function () {

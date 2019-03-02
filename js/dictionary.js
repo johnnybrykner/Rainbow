@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         en: 'Our mission is to promote Polish folk culture and keep our heritage alive.',
                     },
                     about_section_one_heading: {
-                        pl: 'Patria jest organizacją publiczną typu non-profit. Założona w 2005 roku, składa się z byłych członków studenckiego studenckiego zespołu pieśni i tańca "Katowice".',
+                        pl: 'Patria jest organizacją publiczną typu non-profit. Założona w 2005 roku, składa się z byłych członków studenckiego zespołu pieśni i tańca "Katowice".',
                         en: 'Patria is a non-profit public organization. Founded in 2005, it consists of former members of a Polish student folk song and dance ensemble “Katowice”.',
                     },
                     about_section_two_heading: {

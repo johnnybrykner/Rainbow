@@ -8,13 +8,16 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     setTimeout(function(){
-        // Smooth scrolling  
-        for (let i=0; i<=2; i++) {
-            document.querySelectorAll(".link--redirect")[i].addEventListener("click", function() {
+        // Smooth scrolling
+        const redirectLinks = document.querySelectorAll(".link--redirect");
+        const scrollLinks = document.querySelectorAll(".link--scroll");
+        for (let i=0; i<redirectLinks.length; i++) {
+            redirectLinks[i].addEventListener("click", function() {
                 localStorage.removeItem('scroll');
             })
-
-            document.querySelectorAll(".link--scroll")[i].addEventListener("click", function(e) {
+        }
+        for (let i=0; i<scrollLinks.length; i++) {
+            scrollLinks[i].addEventListener("click", function(e) {
                 if (window.location.href === e.target.href) { e.preventDefault() };
                 localStorage.setItem('scroll', e.target.getAttribute('el'));
                 document.getElementById(localStorage.getItem('scroll')).scrollIntoView({behavior: 'smooth', block: 'center'});

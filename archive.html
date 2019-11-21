@@ -42,16 +42,14 @@
                   <div class="burger-line3"></div>
                   </div>
                 </button>
-                <img src="img/uk.png" alt="UK flag" class="lang-switch" @click="changeLang()" v-if="lang==='pl'">
-                <img src="img/pl.png" alt="Poland flag" class="lang-switch" @click="changeLang()" v-else>
             </section>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
+                    <!-- <li class="nav-item">
+                        <a class="nav-link link--scroll" href="index.html" el="posts">{{ langSwitch('nav_item_events') }}</a>
+                    </li> -->
                     <li class="nav-item">
-                        <a class="nav-link link--scroll" href="index.html" el="calendar">{{ langSwitch('nav_item_events') }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link visited link--redirect" href="archive.html">{{ langSwitch('nav_item_news') }}</a>
+                        <a class="nav-link visited link--redirect" href="archive.html">{{ langSwitch('nav_item_events') }}</a>
                     </li>
                     <li class="nav-item">
 
@@ -67,8 +65,6 @@
                 </ul>
             </div>
         </div>
-        <img src="img/uk.png" alt="UK flag" class="lang-switch-desk" @click="changeLang()" v-if="lang==='pl'">
-        <img src="img/pl.png" alt="Poland flag" class="lang-switch-desk" @click="changeLang()" v-else>
     </nav>
 
     <!-- Header -->
@@ -114,18 +110,21 @@
     <footer>
         <div class="container">
             <div class="footer-text">
-                <div>
-                    <p class="text-bolder">Stowarzyszenie Kultury i Folkloru Patria</p>
-                    <p>Młyńska 5</p>
-                    <p>44-100 Katowice</p>
+                <div class="footer-address">
+                    <p class="text-bolder"> "PATRIA" Akademickie Stowarzyszenie Kultury i Folkloru przy Uniwersytecie Śląskim </p>
+                    <p> 40-064 Katowice ul. Kopernika 14</p>
+                    <p class="text-bolder">Adres do korespondencji: </p>
+                    <p>40-424 Katowice ul. Magazynowa 21</p>
                 </div>
-                <a href="mailto:skif_patria@wp.pl"><img src="img/mail.svg"> skif_patria@wp.pl</a>
-                <a href="https://www.instagram.com/skif_patria/" target="_blank"><img src="img/instagram-logo.svg"> @skif_patria</a>
-                <a href="tel:‭+48-790-844-841"> <img src="img/phone.svg">‭+48 790 844 841‬‬</a>
+                <div class="some">
+                    <a href="mailto:skif_patria@wp.pl"><img src="img/mail.svg"> skif_patria@wp.pl</a>
+                    <a href="https://www.instagram.com/skif_patria/" target="_blank"><img src="img/instagram-logo.svg"> @skif_patria</a>
+                    <a href="https://www.facebook.com/Akademickie-Stowarzyszenie-Kultury-i-Folkloru-Patria-125621818840183/" target="_blank"><img src="img/facebook.svg"> patria</a>
+                    <a href="tel:‭+48-790-844-841"> <img src="img/phone.svg">‭+48 790 844 841‬‬</a>
 
-                <div>
-                    <a class="btn btn-outline-primary btn-sm btn-footer link--scroll" href="about.html" el="support">{{ langSwitch('footer_button_support') }}</a>
-
+                    <div>
+                        <a class="btn btn-outline-primary btn-sm btn-footer link--scroll" href="about.html" el="support">{{ langSwitch('footer_button_support') }}</a>
+                    </div>
                 </div>
 
                 <span class="copyright">&copy;{{ langSwitch('footer_copyright') }}</span>
@@ -138,14 +137,11 @@
 </div>
 
     <!-- Bootstrap core JavaScript -->
-    <script src='js/jquery.min.js'></script>
+    <script src='vendor/jquery/jquery.min.js'></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Plugin JavaScript -->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Contact form JavaScript -->
-    <script src="js/jqBootstrapValidation.min.js"></script>
 
     <!-- Custom scripts for this template -->
     <script src="js/script.js"></script>

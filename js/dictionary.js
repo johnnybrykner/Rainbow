@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
         el: '#page',
         data() {
             return {
-                lang: localStorage.getItem('lang') ? localStorage.getItem('lang') : 'pl',
+                lang: 'pl',
                 texts: {
                     nav_lang_switch: {
                         pl: 'EN',
@@ -33,8 +33,16 @@ document.addEventListener("DOMContentLoaded", function() {
                         pl: 'Jesteśmy',
                         en: 'We are',
                     },
+                    index_top_summary: {
+                        pl: 'Akademickie Stowarzyszenie Kultury i Folkloru przy Uniwersytecie Śląskim',
+                        en: ''
+                    },
+                    index_top_we_are: {
+                        pl: 'Jesteśmy organizacją pożytku publicznego',
+                        en: ''
+                    },
                     index_events_heading: {
-                        pl: 'Nadchodzące wydarzenia',
+                        pl: 'Wydarzenia',
                         en: 'Upcoming events',
                     },
                     index_posts_heading: {
@@ -42,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         en: 'News',
                     },
                     index_posts_button_older: {
-                        pl: 'Starsze posty →',
+                        pl: 'zobacz więcej →',
                         en: 'Older posts →',
                     },
                     index_insta_heading: {
@@ -58,15 +66,15 @@ document.addEventListener("DOMContentLoaded", function() {
                         en: 'Support Patria',
                     },
                     footer_copyright: {
-                        pl: 'Patria 2019',
-                        en: 'Patria 2019',
+                        pl: 'Patria 2020',
+                        en: 'Patria 2020',
                     },
                     about_header_heading: {
-                        pl: 'Naszą misją jest promowanie polskiej kultury ludowej i pielęgnowanie naszego dziedzictwa.',
+                        pl: 'Naszą misją jest promowanie polskiej kultury ludowej i dziedzictwa narodowego.',
                         en: 'Our mission is to promote Polish folk culture and keep our heritage alive.',
                     },
                     about_section_one_heading: {
-                        pl: 'Patria jest organizacją publiczną typu non-profit. Założona w 2005 roku, składa się z byłych członków studenckiego zespołu pieśni i tańca "Katowice".',
+                        pl: 'Stowarzyszenie "PATRIA" jest organizacją pożytku publicznego, które zostalo założone w 2004 roku przez wychowanków Studenckiego Zespołu Pieśni i Tańca "KATOWICE" przy Uniwersytecie Śląskim.',
                         en: 'Patria is a non-profit public organization. Founded in 2005, it consists of former members of a Polish student folk song and dance ensemble “Katowice”.',
                     },
                     about_section_two_heading: {
@@ -74,19 +82,19 @@ document.addEventListener("DOMContentLoaded", function() {
                         en: 'Our mission',
                     },
                     about_section_two_descr: {
-                        pl: 'Pomysł utworzenia Patrii narodził się w czasie jednej z naszych podróży zagranicznych od byłych i obecnych członków  zespołu "Katowice". Celem organizacji było zgromadzenie ludzi, którzy podzielają tę samą pasję do polskiej kultury ludowej i których misją jest utrzymanie jej przy życiu. Organizujemy pokazy, koncerty i warsztaty na całym świecie. W ten sposób możemy zapewnić młodym pokoleniom dostęp do naszego dziedzictwa kulturowego. Polska ma unikalną tożsamość kulturową i bardzo ważne jest dla nas zachowanie jej w dzisiejszych czasach.',
+                        pl: 'Pomysł utworzenia Stowarzyszenia Patria narodził się w czasie jednej z naszych podróży zagranicznych wśród byłych członków  zespołu "Katowice". Celem organizacji było zgromadzenie ludzi, którzy podzielają pasję do polskiej kultury ludowej i których misją jest kultywowanie i rozpowszechnianie.',
                         en: 'The idea of forming Patria came from the former and current members of “Katowice” during one of our trips abroad. The goal of the organization was to gather people who share the same passion for Polish folk culture and whose mission is to keep it alive. We do it by organizing shows, concerts and workshops all over the world. That way we can ensure our cultural heritage reaching the young generations. Poland has an unique cultural identity and we find it very important to preserve it in the modern days.',
                     },
                     about_support_heading: {
-                        pl: 'Patria jest czymś więcej niż tylko zgromadzeniem, jesteśmy rodziną',
+                        pl: 'Patria jest czymś więcej niż tylko stowarzyszeniem, jesteśmy rodziną',
                         en: 'Patria is more than just an association, it’s a family.',
                     },
                     about_support_how_to: {
-                        pl: 'Potrzebujemy Twojego wsparcia, aby nasza rodzina mogła się rozwijać. Organizacja pokazów i warsztatów kosztuje nie tylko czas, ale i pieniądze. Wesprzyj nas przekazując 1% swojego podatku. Ciebie to nic nie kosztuje a nam bardzo pomaga.',
+                        pl: 'Potrzebujemy Twojego wsparcia, aby nasza rodzina mogła się rozwijać. Organizacja koncertów i warsztatów kosztuje nie tylko czas, ale i pieniądze. Wesprzyj nas przekazując 1% swojego podatku. Ciebie to nic nie kosztuje a nam bardzo pomaga.',
                         en: 'We need your support to keep our family growing. Organizing shows and workshop costs not only time, but also money. Support us by donating 1% of your tax. It doesn\'t cost you anything, but it helps us a lot.',
                     },
                     about_support_transfer: {
-                        pl: 'Możesz również użyć naszego konta wpłacając dowolną kwotę. Dziękujemy!',
+                        pl: 'Możesz również wpłacić na nasze konto dowolną kwotę. Dziękujemy!',
                         en: 'You can also use our account and deposit any amount. Thank you!',
                     },
                     about_contact_heading: {
@@ -110,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         en: 'Follow us on Instagram',
                     },
                     archive_header_heading: {
-                        pl: 'ARCHIWUM NOWOŚCI',
+                        pl: 'ARCHIWUM WYDARZEŃ',
                         en: 'NEWS ARCHIVE',
                     },
                 },
@@ -119,11 +127,11 @@ document.addEventListener("DOMContentLoaded", function() {
         methods: {
             langSwitch(key) {
                 return this.texts[key][this.lang];
-            },
-            changeLang() {
-                this.lang === 'pl' ? this.lang = 'en' : this.lang = 'pl';
-                localStorage.setItem('lang', this.lang);
             }
+            // changeLang() {
+            //     this.lang === 'pl' ? this.lang = 'en' : this.lang = 'pl';
+            //     localStorage.setItem('lang', this.lang);
+            // }
         }
     })
 })

@@ -121,149 +121,149 @@ document.addEventListener("DOMContentLoaded", function() {
         return `Opublikowane ${split[2]}.${split[1]}.${split[0]} o ${split[3]}`;
     }
 
-    function monthize(date) {
-        let split = date.split(/[-T\s]/g),
-            monthnames = ["0", "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
-        return monthnames[Number(split[1])] + ", " + split[0];
-    }
+    // function monthize(date) {
+    //     let split = date.split(/[-T\s]/g),
+    //         monthnames = ["0", "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
+    //     return monthnames[Number(split[1])] + ", " + split[0];
+    // }
 
-    function dayize(date) {
-        let split = date.split(/[-T\s]/g);
-        return split[2];
-    }
+    // function dayize(date) {
+    //     let split = date.split(/[-T\s]/g);
+    //     return split[2];
+    // }
 
-    function timize(date) {
-        let split = date.split(/[-T\s]/g);
-        return split[3].split("").slice(0,5).join("");
-    }
+    // function timize(date) {
+    //     let split = date.split(/[-T\s]/g);
+    //     return split[3].split("").slice(0,5).join("");
+    // }
 
 
 
     /*--------------------------------------------------Event Swiping--------------------------------------------------*/
 
-    let wydarzenia = [],
-        boxes = [],
-        labels = [],
-        counter = 2,
-        mobile;
+    // let wydarzenia = [],
+    //     boxes = [],
+    //     labels = [],
+    //     counter = 2,
+    //     mobile;
 
-    if (document.querySelector(".calendar")) {
-        fetch('http://skif-patria.pl/wordpress/wp-json/tribe/events/v1/events')
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (json) {
-                appendEvents(json.events);
-            });
-    }
+    // if (document.querySelector(".calendar")) {
+    //     fetch('http://skif-patria.pl/wordpress/wp-json/tribe/events/v1/events')
+    //         .then(function (response) {
+    //             return response.json();
+    //         })
+    //         .then(function (json) {
+    //             appendEvents(json.events);
+    //         });
+    // }
 
 
 
-    function appendEvents(events) {
-        if (window.innerWidth<992) {
-            boxes[0] = document.querySelector(".calendar").insertBefore(document.createElement("figure"), null);
-            boxes[0].classList.add("event-showcase");
-            labels[0] = document.querySelector(".event-showcase").insertBefore(document.createElement("section"), null);
-            labels[0].classList.add("event__month");
-            mobile = true;
-            counter = 0;
-        } else {
-            for (let i=0; i<3; i++) {
-                boxes[i] = document.querySelector(".calendar").insertBefore(document.createElement("figure"), null);
-                boxes[i].classList.add("event-showcase");
-                labels[i] = document.querySelectorAll(".event-showcase")[i].insertBefore(document.createElement("section"), null);
-                labels[i].classList.add("event__month");
-            }
-            mobile = false;
-            counter = 2;
-        }
+    // function appendEvents(events) {
+    //     if (window.innerWidth<992) {
+    //         boxes[0] = document.querySelector(".calendar").insertBefore(document.createElement("figure"), null);
+    //         boxes[0].classList.add("event-showcase");
+    //         labels[0] = document.querySelector(".event-showcase").insertBefore(document.createElement("section"), null);
+    //         labels[0].classList.add("event__month");
+    //         mobile = true;
+    //         counter = 0;
+    //     } else {
+    //         for (let i=0; i<3; i++) {
+    //             boxes[i] = document.querySelector(".calendar").insertBefore(document.createElement("figure"), null);
+    //             boxes[i].classList.add("event-showcase");
+    //             labels[i] = document.querySelectorAll(".event-showcase")[i].insertBefore(document.createElement("section"), null);
+    //             labels[i].classList.add("event__month");
+    //         }
+    //         mobile = false;
+    //         counter = 2;
+    //     }
         
-        for (let i = 0; i < events.length; i++) {
-            let event = {},
-                time;
+    //     for (let i = 0; i < events.length; i++) {
+    //         let event = {},
+    //             time;
 
-            event.start = events[i].start_date;
-            event.end = events[i].end_date;
-            event.title = events[i].title;
-            if (events[i].venue.length !== 0) {
-                event.venue = ' w ' + events[i].venue.venue + ", " + events[i].venue.city;
-            } else {
-                event.venue = "";
-            }
-            wydarzenia[i] = event;
+    //         event.start = events[i].start_date;
+    //         event.end = events[i].end_date;
+    //         event.title = events[i].title;
+    //         if (events[i].venue.length !== 0) {
+    //             event.venue = ' w ' + events[i].venue.venue + ", " + events[i].venue.city;
+    //         } else {
+    //             event.venue = "";
+    //         }
+    //         wydarzenia[i] = event;
 
-            if (timize(wydarzenia[i].start) === "00:00") {
-                time = "Cały dzień";
-            } else {
-                time = timize(wydarzenia[i].start) + " - " + timize(wydarzenia[i].end);
-            }
-            wydarzenia[i].time = time;
-        }
+    //         if (timize(wydarzenia[i].start) === "00:00") {
+    //             time = "Cały dzień";
+    //         } else {
+    //             time = timize(wydarzenia[i].start) + " - " + timize(wydarzenia[i].end);
+    //         }
+    //         wydarzenia[i].time = time;
+    //     }
 
-        for (let i = 0; i < boxes.length; i++) {
-            let day = dayize(wydarzenia[i].start),
-                month = monthize(wydarzenia[i].start);
-            labels[i].innerHTML = '<h3>' + month + '</h3>';
-            boxes[i].innerHTML += '<h4>' + day + '</h4>' + '<p>' + wydarzenia[i].title + wydarzenia[i].venue + '</p>' + '<p>' + wydarzenia[i].time + '</p>';
-        }
+    //     for (let i = 0; i < boxes.length; i++) {
+    //         let day = dayize(wydarzenia[i].start),
+    //             month = monthize(wydarzenia[i].start);
+    //         labels[i].innerHTML = '<h3>' + month + '</h3>';
+    //         boxes[i].innerHTML += '<h4>' + day + '</h4>' + '<p>' + wydarzenia[i].title + wydarzenia[i].venue + '</p>' + '<p>' + wydarzenia[i].time + '</p>';
+    //     }
 
-        if (counter === 2 || counter === 0) {document.querySelector(".left").classList.add("hidden")}
-        if (mobile===true) {
-            if (wydarzenia.length === 1) {document.querySelector(".right").classList.add("hidden")}
-        }
+    //     if (counter === 2 || counter === 0) {document.querySelector(".left").classList.add("hidden")}
+    //     if (mobile===true) {
+    //         if (wydarzenia.length === 1) {document.querySelector(".right").classList.add("hidden")}
+    //     }
         
-        if (mobile===false) {
-            if (wydarzenia.length < 3) {
-                document.querySelector(".right").classList.add("hidden");
-                for (let i=wydarzenia.length; i<3; ++i) {
-                    labels[i].innerHTML = "<h3>Więcej nadchodzi</h3>";
-                }
-            }
-        }
+    //     if (mobile===false) {
+    //         if (wydarzenia.length < 3) {
+    //             document.querySelector(".right").classList.add("hidden");
+    //             for (let i=wydarzenia.length; i<3; ++i) {
+    //                 labels[i].innerHTML = "<h3>Więcej nadchodzi</h3>";
+    //             }
+    //         }
+    //     }
 
-        document.querySelector(".right").addEventListener("click", function() {
-            if (counter < wydarzenia.length-1) {
-                counter ++;
+    //     document.querySelector(".right").addEventListener("click", function() {
+    //         if (counter < wydarzenia.length-1) {
+    //             counter ++;
 
-                document.querySelector(".left").classList.remove("hidden");
-                if (counter === wydarzenia.length-1) {document.querySelector(".right").classList.add("hidden")}
-                let newOne = document.querySelector(".calendar").insertBefore(document.createElement("figure"), null);
-                newOne.classList.add("event-showcase");
+    //             document.querySelector(".left").classList.remove("hidden");
+    //             if (counter === wydarzenia.length-1) {document.querySelector(".right").classList.add("hidden")}
+    //             let newOne = document.querySelector(".calendar").insertBefore(document.createElement("figure"), null);
+    //             newOne.classList.add("event-showcase");
 
-                boxes[0].parentNode.removeChild(boxes[0]);
-                boxes = document.querySelectorAll(".event-showcase");
-                newOne.innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter].start)}</h3></section><h4>${dayize(wydarzenia[counter].start)}</h4><p>${wydarzenia[counter].title} ${wydarzenia[counter].venue}</p><p>${wydarzenia[counter].time}</p>`;
-            }
-        });
+    //             boxes[0].parentNode.removeChild(boxes[0]);
+    //             boxes = document.querySelectorAll(".event-showcase");
+    //             newOne.innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter].start)}</h3></section><h4>${dayize(wydarzenia[counter].start)}</h4><p>${wydarzenia[counter].title} ${wydarzenia[counter].venue}</p><p>${wydarzenia[counter].time}</p>`;
+    //         }
+    //     });
 
-        document.querySelector(".left").addEventListener("click", function() {
-            if (mobile===false) {
-                if (counter > 2) {
-                    counter --;
+    //     document.querySelector(".left").addEventListener("click", function() {
+    //         if (mobile===false) {
+    //             if (counter > 2) {
+    //                 counter --;
 
-                    document.querySelector(".right").classList.remove("hidden");
-                    if (counter === 2) {document.querySelector(".left").classList.add("hidden")}
-                    let newOne = document.querySelector(".calendar").insertBefore(document.createElement("figure"), null);
-                    newOne.classList.add("event-showcase");
-                    boxes[2].parentNode.removeChild(boxes[2]);
-                    boxes = document.querySelectorAll(".event-showcase");
-                    boxes[1].innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter-1].start)}</h3></section><h4>${dayize(wydarzenia[counter-1].start)}</h4><p>${wydarzenia[counter-1].title} ${wydarzenia[counter-1].venue}</p><p>${wydarzenia[counter-1].time}</p>`;
-                    boxes[0].innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter-2].start)}</h3></section><h4>${dayize(wydarzenia[counter-2].start)}</h4><p>${wydarzenia[counter-2].title} ${wydarzenia[counter-2].venue}</p><p>${wydarzenia[counter-2].time}</p>`;
-                    newOne.innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter].start)}</h3></section><h4>${dayize(wydarzenia[counter].start)}</h4><p>${wydarzenia[counter].title} ${wydarzenia[counter].venue}</p><p>${wydarzenia[counter].time}</p>`;
-                }
-            } else {
-                if (counter > 0) {
-                    counter --;
+    //                 document.querySelector(".right").classList.remove("hidden");
+    //                 if (counter === 2) {document.querySelector(".left").classList.add("hidden")}
+    //                 let newOne = document.querySelector(".calendar").insertBefore(document.createElement("figure"), null);
+    //                 newOne.classList.add("event-showcase");
+    //                 boxes[2].parentNode.removeChild(boxes[2]);
+    //                 boxes = document.querySelectorAll(".event-showcase");
+    //                 boxes[1].innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter-1].start)}</h3></section><h4>${dayize(wydarzenia[counter-1].start)}</h4><p>${wydarzenia[counter-1].title} ${wydarzenia[counter-1].venue}</p><p>${wydarzenia[counter-1].time}</p>`;
+    //                 boxes[0].innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter-2].start)}</h3></section><h4>${dayize(wydarzenia[counter-2].start)}</h4><p>${wydarzenia[counter-2].title} ${wydarzenia[counter-2].venue}</p><p>${wydarzenia[counter-2].time}</p>`;
+    //                 newOne.innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter].start)}</h3></section><h4>${dayize(wydarzenia[counter].start)}</h4><p>${wydarzenia[counter].title} ${wydarzenia[counter].venue}</p><p>${wydarzenia[counter].time}</p>`;
+    //             }
+    //         } else {
+    //             if (counter > 0) {
+    //                 counter --;
 
-                    document.querySelector(".right").classList.remove("hidden");
-                    if (counter === 0) {document.querySelector(".left").classList.add("hidden")}
-                    let newOne = document.querySelector(".calendar").insertBefore(document.createElement("figure"), null);
-                    newOne.classList.add("event-showcase");
-                    boxes[0].parentNode.removeChild(boxes[0]);
-                    boxes = document.querySelectorAll(".event-showcase");
-                    newOne.innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter].start)}</h3></section><h4>${dayize(wydarzenia[counter].start)}</h4><p>${wydarzenia[counter].title} ${wydarzenia[counter].venue}</p><p>${wydarzenia[counter].time}</p>`;
-                }
-            }
-        });
-    }
+    //                 document.querySelector(".right").classList.remove("hidden");
+    //                 if (counter === 0) {document.querySelector(".left").classList.add("hidden")}
+    //                 let newOne = document.querySelector(".calendar").insertBefore(document.createElement("figure"), null);
+    //                 newOne.classList.add("event-showcase");
+    //                 boxes[0].parentNode.removeChild(boxes[0]);
+    //                 boxes = document.querySelectorAll(".event-showcase");
+    //                 newOne.innerHTML = `<section class="event__month"><h3>${monthize(wydarzenia[counter].start)}</h3></section><h4>${dayize(wydarzenia[counter].start)}</h4><p>${wydarzenia[counter].title} ${wydarzenia[counter].venue}</p><p>${wydarzenia[counter].time}</p>`;
+    //             }
+    //         }
+    //     });
+    // }
 }); // End of use strict

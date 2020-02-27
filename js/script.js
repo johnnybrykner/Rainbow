@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function() {
         feed.run();
     }
 
-    fetch("http://skif-patria.pl/wordpress/wp-json/wp/v2/posts")
+    fetch("https://skif-patria.pl/wordpress/wp-json/wp/v2/posts")
         .then(function (response) {
             return response.json();
         })
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function() {
     //     mobile;
 
     // if (document.querySelector(".calendar")) {
-    //     fetch('http://skif-patria.pl/wordpress/wp-json/tribe/events/v1/events')
+    //     fetch('https://skif-patria.pl/wordpress/wp-json/tribe/events/v1/events')
     //         .then(function (response) {
     //             return response.json();
     //         })
